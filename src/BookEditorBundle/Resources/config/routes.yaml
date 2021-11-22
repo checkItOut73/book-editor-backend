@@ -1,3 +1,5 @@
-content:
-    path: /content
-    controller: App\BookEditorBundle\Controller\GetContentController::getContent
+book:
+    path: /book/{bookId}
+    controller: App\BookEditorBundle\Controller\GetBookController::getBook
+    requirements:
+        bookId: '\d+'

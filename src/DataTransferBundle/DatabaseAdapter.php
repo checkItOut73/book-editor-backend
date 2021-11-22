@@ -13,6 +13,15 @@ class DatabaseAdapter
         $this->databaseConnection = $databaseConnection;
     }
 
+    public function getRow(string $sqlQuery): array
+    {
+        $statement = $this->databaseConnection->query($sqlQuery);
+
+        $row = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $row ? $row : [];
+    }
+
     public function getRows(string $sqlQuery): array
     {
         $rows = [];

@@ -23,6 +23,58 @@ class DatabaseAdapterTest extends TestCase
         $this->databaseAdapter = new DatabaseAdapter($this->databaseConnection);
     }
 
+    public function testGetRowPerformsTheCorrectQueryAndFetch()
+    {
+        $this->databaseAdapter->getRow('SELECT column1, column2 FROM [table]');
+
+        $this->assertEquals(
+            ['SELECT column1, column2 FROM [table]'],
+            $this->databaseConnection->getQueryCalls()
+        );
+        $this->assertEquals(
+            [
+                [PDO::FETCH_ASSOC, null, null]
+            ],
+            $this->pdoStatement->getFetchCalls()
+        );
+    }
+
+    public function testGetRowReturnsTheRowCorrectly()
+    {
+        $this->databaseConnection->setQueryResult(
+            (new PDOStatementStub())
+                ->setFetchResults([
+                    [
+                        'column1' => 'Clown',
+                        'column2' => 'Kostüm'
+                    ]
+                ])
+        );
+
+        $this->assertEquals(
+            [
+                'column1' => 'Clown',
+                'column2' => 'Kostüm'
+            ],
+            $this->databaseAdapter->getRow('SELECT column1, column2 FROM [table]')
+        );
+    }
+
+    public function testGetRowReturnsEmptyArrayIfFetchHasNoResult()
+    {
+        $this->databaseConnection->setQueryResult(
+            (new PDOStatementStub())
+                ->setFetchResults([
+                    false
+                ])
+        );
+
+        $this->assertEquals(
+            [],
+            $this->databaseAdapter->getRow('SELECT column1, column2 FROM [table]')
+        );
+    }
+
     public function testGetRowsPerformsTheCorrectQueryAndFetch()
     {
         $this->databaseAdapter->getRows('SELECT column1, column2 FROM [table]');
