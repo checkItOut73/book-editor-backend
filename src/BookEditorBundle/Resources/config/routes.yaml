@@ -1,0 +1,3 @@
+content:
+    path: /content
+    controller: App\BookEditorBundle\Controller\GetContentController::getContent

@@ -1,0 +1,5 @@
+parameters:
+    database_server: 'sqlserver'
+    database_database: 'master'
+    database_user: 'SA'
+    database_password: 'Sample123'

@@ -1,0 +1,1 @@
+./build/composer.sh install

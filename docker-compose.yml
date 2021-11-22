@@ -1,0 +1,25 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: build/Dockerfile
+    image: php8
+    ports:
+      - 8080:80      
+    volumes:
+      - .:/var/www/html
+
+  sqlserver:
+      image: mcr.microsoft.com/mssql/server:latest
+      container_name: sqlserver
+      environment:
+          - ACCEPT_EULA=Y
+          - SA_PASSWORD=Sample123
+      volumes:
+          - database:/var/opt/mssql
+      ports:
+          - '1433:1433'
+
+volumes:
+  database:

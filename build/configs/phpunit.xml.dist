@@ -1,0 +1,10 @@
+<phpunit
+    bootstrap="../../vendor/autoload.php"
+    forceCoversAnnotation="true"
+>
+    <filter>
+        <whitelist>
+            <directory>../../src</directory>
+        </whitelist>
+    </filter>
+</phpunit>
