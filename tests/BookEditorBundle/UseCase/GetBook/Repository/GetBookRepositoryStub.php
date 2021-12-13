@@ -2,7 +2,7 @@
 
 namespace Tests\BookEditorBundle\UseCase\GetBook\Repository;
 
-use App\BookEditorBundle\UseCase\GetBook\Entity\Book;
+use App\BookEditorBundle\Entity\Book;
 use App\BookEditorBundle\UseCase\GetBook\Repository\GetBookRepository;
 use Exception;
 

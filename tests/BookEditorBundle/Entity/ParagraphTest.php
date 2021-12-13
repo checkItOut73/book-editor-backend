@@ -1,11 +1,11 @@
 <?php declare(strict_types = 1);
 
-namespace App\BookEditorBundle\UseCase\GetBook\Entity;
+namespace App\BookEditorBundle\Entity;
 
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \App\BookEditorBundle\UseCase\GetBook\Entity\Paragraph
+ * @covers \App\BookEditorBundle\Entity\Paragraph
  */
 class ParagraphTest extends TestCase
 {

@@ -1,12 +1,12 @@
 <?php declare(strict_types = 1);
 
-namespace App\BookEditorBundle\UseCase\GetBook\Entity;
+namespace App\BookEditorBundle\Entity;
 
 class Chapter
 {
-    private int $id;
+    private ?int $id = null; // allow null for new chapters
     private int $number;
-    private string $heading;
+    private ?string $heading = null; // default must not be '' to keep heading if field is not given
 
     /** @var array<Paragraph> $paragraphs */
     private array $paragraphs;
@@ -18,7 +18,7 @@ class Chapter
         return $this;
     }
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -42,7 +42,7 @@ class Chapter
         return $this;
     }
 
-    public function getHeading(): string
+    public function getHeading(): ?string
     {
         return $this->heading;
     }

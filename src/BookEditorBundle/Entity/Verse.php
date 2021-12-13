@@ -1,13 +1,26 @@
 <?php declare(strict_types = 1);
 
-namespace App\BookEditorBundle\UseCase\GetBook\Entity;
+namespace App\BookEditorBundle\Entity;
 
 class Verse
 {
+    private int $id;
     private int $numberInParagraph;
     private int $numberInChapter;
     private string $text;
     private int $paragraphId;
+
+    public function setId(int $id): Verse
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
 
     public function setNumberInParagraph(int $numberInParagraph): Verse
     {

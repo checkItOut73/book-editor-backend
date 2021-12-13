@@ -2,7 +2,7 @@
 
 namespace App\BookEditorBundle\UseCase\GetBook\Repository;
 
-use App\BookEditorBundle\UseCase\GetBook\Entity\Paragraph;
+use App\BookEditorBundle\Entity\Paragraph;
 use App\DataTransferBundle\DatabaseAdapter;
 
 class GetParagraphsRepository

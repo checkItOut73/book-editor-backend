@@ -2,7 +2,7 @@
 
 namespace App\BookEditorBundle\UseCase\GetBook\Repository;
 
-use App\BookEditorBundle\UseCase\GetBook\Entity\Book;
+use App\BookEditorBundle\Entity\Book;
 use App\BookEditorBundle\UseCase\GetBook\Exception\BookNotFoundException;
 use PHPUnit\Framework\TestCase;
 use Tests\DataTransferBundle\DatabaseAdapterStub;
@@ -52,7 +52,7 @@ class GetBookRepositoryTest extends TestCase
             (new Book())
                 ->setId(5)
                 ->setTitle('Die Kuh macht muh'),
-            $this->repository->getBook(2)
+            $this->repository->getBook(5)
         );
     }
 }

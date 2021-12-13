@@ -2,7 +2,7 @@
 
 namespace App\BookEditorBundle\UseCase\GetBook\Repository;
 
-use App\BookEditorBundle\UseCase\GetBook\Entity\Paragraph;
+use App\BookEditorBundle\Entity\Paragraph;
 use PHPUnit\Framework\TestCase;
 use Tests\DataTransferBundle\DatabaseAdapterStub;
 

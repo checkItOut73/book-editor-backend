@@ -2,7 +2,7 @@
 
 namespace App\BookEditorBundle\UseCase\GetBook;
 
-use App\BookEditorBundle\UseCase\GetBook\Entity\Chapter;
+use App\BookEditorBundle\Entity\Chapter;
 use App\BookEditorBundle\UseCase\GetBook\Repository\GetBookRepository;
 use App\BookEditorBundle\UseCase\GetBook\Repository\GetChaptersRepository;
 use App\BookEditorBundle\UseCase\GetBook\Repository\GetParagraphsRepository;
@@ -33,13 +33,7 @@ class GetBookInteractor
 
     public function execute(int $bookId): GetBookInteractor
     {
-        try {
-            $book = $this->getBookRepository->getBook($bookId);
-        } catch (Exception $exception) {
-            $this->getBookPresenter->setException($exception);
-            return $this;
-        }
-
+        $book = $this->getBookRepository->getBook($bookId);
         $chapters = $this->getChaptersRepository->getChapters($bookId);
 
         $paragraphsGroupedByChapterId = $this->getParagraphsRepository->getParagraphsGroupedByChapterId(

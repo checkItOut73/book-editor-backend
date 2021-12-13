@@ -27,7 +27,7 @@ class GetBookController extends AbstractController
         return new Response(
             $this->getBookPresenter->getJsonString(),
             $this->getBookPresenter->getHttpStatusCode(),
-            ['Book-type' => 'application/json']
+            ['Content-type' => 'application/json']
         );
     }
 }

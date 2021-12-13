@@ -2,11 +2,10 @@
 
 namespace App\BookEditorBundle\UseCase\GetBook;
 
-use App\BookEditorBundle\UseCase\GetBook\Entity\Book;
-use App\BookEditorBundle\UseCase\GetBook\Entity\Chapter;
-use App\BookEditorBundle\UseCase\GetBook\Entity\Paragraph;
-use App\BookEditorBundle\UseCase\GetBook\Entity\Verse;
-use App\BookEditorBundle\UseCase\GetBook\Exception\BookNotFoundException;
+use App\BookEditorBundle\Entity\Book;
+use App\BookEditorBundle\Entity\Chapter;
+use App\BookEditorBundle\Entity\Paragraph;
+use App\BookEditorBundle\Entity\Verse;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -41,6 +40,7 @@ class GetBookJsonPresenterTest extends TestCase
                                 ->setChapterId(12)
                                 ->setVerses([
                                     (new Verse())
+                                        ->setId(49826)
                                         ->setNumberInChapter(1)
                                         ->setNumberInParagraph(1)
                                         ->setText(
@@ -51,6 +51,7 @@ class GetBookJsonPresenterTest extends TestCase
                                         )
                                         ->setParagraphId(67),
                                     (new Verse())
+                                        ->setId(49827)
                                         ->setNumberInChapter(2)
                                         ->setNumberInParagraph(2)
                                         ->setText(
@@ -58,6 +59,7 @@ class GetBookJsonPresenterTest extends TestCase
                                         )
                                         ->setParagraphId(67),
                                     (new Verse())
+                                        ->setId(49828)
                                         ->setNumberInChapter(3)
                                         ->setNumberInParagraph(3)
                                         ->setText(
@@ -73,6 +75,7 @@ class GetBookJsonPresenterTest extends TestCase
                                 ->setChapterId(12)
                                 ->setVerses([
                                     (new Verse())
+                                        ->setId(49829)
                                         ->setNumberInChapter(4)
                                         ->setNumberInParagraph(1)
                                         ->setText(
@@ -90,6 +93,7 @@ class GetBookJsonPresenterTest extends TestCase
                                 ->setChapterId(12)
                                 ->setVerses([
                                     (new Verse())
+                                        ->setId(49830)
                                         ->setNumberInChapter(5)
                                         ->setNumberInParagraph(1)
                                         ->setText(
@@ -101,6 +105,7 @@ class GetBookJsonPresenterTest extends TestCase
                                         )
                                         ->setParagraphId(69),
                                     (new Verse())
+                                        ->setId(49831)
                                         ->setNumberInChapter(6)
                                         ->setNumberInParagraph(2)
                                         ->setText(
@@ -126,6 +131,7 @@ class GetBookJsonPresenterTest extends TestCase
                                 ->setChapterId(54)
                                 ->setVerses([
                                     (new Verse())
+                                        ->setId(54354)
                                         ->setNumberInChapter(1)
                                         ->setNumberInParagraph(1)
                                         ->setText(
@@ -134,6 +140,7 @@ class GetBookJsonPresenterTest extends TestCase
                                         )
                                         ->setParagraphId(106),
                                     (new Verse())
+                                        ->setId(54355)
                                         ->setNumberInChapter(2)
                                         ->setNumberInParagraph(2)
                                         ->setText(
@@ -142,6 +149,7 @@ class GetBookJsonPresenterTest extends TestCase
                                         )
                                         ->setParagraphId(106),
                                     (new Verse())
+                                        ->setId(54356)
                                         ->setNumberInChapter(3)
                                         ->setNumberInParagraph(3)
                                         ->setText(
@@ -158,6 +166,7 @@ class GetBookJsonPresenterTest extends TestCase
                                 ->setChapterId(54)
                                 ->setVerses([
                                     (new Verse())
+                                        ->setId(54357)
                                         ->setNumberInChapter(4)
                                         ->setNumberInParagraph(1)
                                         ->setText(
@@ -177,14 +186,17 @@ class GetBookJsonPresenterTest extends TestCase
                 'title' => 'A book',
                 'chapters' => [
                     [
+                        'id' => 12,
                         'number' => 1,
                         'heading' => 'Der abgebissene Apfel',
                         'paragraphs' => [
                             [
+                                'id' => 67,
                                 'numberInChapter' => 1,
                                 'heading' => 'Der Karottensalat',
                                 'verses' => [
                                     [
+                                        'id' => 49826,
                                         'numberInParagraph' => 1,
                                         'numberInChapter' => 1,
                                         'text' =>
@@ -194,6 +206,7 @@ class GetBookJsonPresenterTest extends TestCase
                                             'bis zur Gegenwart.'
                                     ],
                                     [
+                                        'id' => 49827,
                                         'numberInParagraph' => 2,
                                         'numberInChapter' => 2,
                                         'text' =>
@@ -201,6 +214,7 @@ class GetBookJsonPresenterTest extends TestCase
                                             'Kunstgeschichte.'
                                     ],
                                     [
+                                        'id' => 49828,
                                         'numberInParagraph' => 3,
                                         'numberInChapter' => 3,
                                         'text' =>
@@ -211,10 +225,12 @@ class GetBookJsonPresenterTest extends TestCase
                                 ]
                             ],
                             [
+                                'id' => 68,
                                 'numberInChapter' => 2,
                                 'heading' => 'Quatsch mit Soße',
                                 'verses' => [
                                     [
+                                        'id' => 49829,
                                         'numberInParagraph' => 1,
                                         'numberInChapter' => 4,
                                         'text' =>
@@ -226,10 +242,12 @@ class GetBookJsonPresenterTest extends TestCase
                                 ]
                             ],
                             [
+                                'id' => 69,
                                 'numberInChapter' => 3,
                                 'heading' => 'Pudding mit Schokoladensoße',
                                 'verses' => [
                                     [
+                                        'id' => 49830,
                                         'numberInParagraph' => 1,
                                         'numberInChapter' => 5,
                                         'text' =>
@@ -239,6 +257,7 @@ class GetBookJsonPresenterTest extends TestCase
                                             'erstmals genauere stilgeschichtliche Untersuchungen unternommen hat.'
                                     ],
                                     [
+                                        'id' => 49831,
                                         'numberInParagraph' => 2,
                                         'numberInChapter' => 6,
                                         'text' =>
@@ -253,14 +272,17 @@ class GetBookJsonPresenterTest extends TestCase
                         ]
                     ],
                     [
+                        'id' => 54,
                         'number' => 2,
                         'heading' => 'Die verrostete Schere',
                         'paragraphs' => [
                             [
+                                'id' => 106,
                                 'numberInChapter' => 1,
                                 'heading' => 'Käsekuchen ohne Käse',
                                 'verses' => [
                                     [
+                                        'id' => 54354,
                                         'numberInParagraph' => 1,
                                         'numberInChapter' => 1,
                                         'text' =>
@@ -268,6 +290,7 @@ class GetBookJsonPresenterTest extends TestCase
                                             'sich erst seit dem 19. Jahrhundert sprechen.'
                                     ],
                                     [
+                                        'id' => 54355,
                                         'numberInParagraph' => 2,
                                         'numberInChapter' => 2,
                                         'text' =>
@@ -275,6 +298,7 @@ class GetBookJsonPresenterTest extends TestCase
                                             'Kunstbetrachtung und biographische Beschreibungen.'
                                     ],
                                     [
+                                        'id' => 54356,
                                         'numberInParagraph' => 3,
                                         'numberInChapter' => 3,
                                         'text' =>
@@ -285,10 +309,12 @@ class GetBookJsonPresenterTest extends TestCase
                                 ]
                             ],
                             [
+                                'id' => 198,
                                 'numberInChapter' => 2,
                                 'heading' => 'Paprikapüree',
                                 'verses' => [
                                     [
+                                        'id' => 54357,
                                         'numberInParagraph' => 1,
                                         'numberInChapter' => 4,
                                         'text' =>
@@ -307,22 +333,8 @@ class GetBookJsonPresenterTest extends TestCase
         );
     }
 
-    public function testGetHttpStatusCodeReturnsOkIfNoExceptionIsGiven()
+    public function testGetHttpStatusCodeReturnsOk()
     {
         $this->assertSame(Response::HTTP_OK, $this->presenter->getHttpStatusCode());
-    }
-
-    public function testGetJsonStringReturnsExceptionMessageIfOneIsGiven()
-    {
-        $this->presenter->setException(new BookNotFoundException('No book found with the given id!'));
-
-        $this->assertSame('{"errorMessage":"No book found with the given id!"}', $this->presenter->getJsonString());
-    }
-
-    public function testGetHttpStatusCodeReturnsNotFoundIfNotFoundExceptionIsGiven()
-    {
-        $this->presenter->setException(new BookNotFoundException('No book found with the given id!'));
-
-        $this->assertSame(Response::HTTP_NOT_FOUND, $this->presenter->getHttpStatusCode());
     }
 }

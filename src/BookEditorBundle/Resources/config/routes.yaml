@@ -1,5 +1,18 @@
-book:
+get_book:
     path: /book/{bookId}
+    methods: GET
     controller: App\BookEditorBundle\Controller\GetBookController::getBook
     requirements:
         bookId: '\d+'
+
+edit_book:
+    path: /book/{bookId}
+    methods: PUT
+    controller: App\BookEditorBundle\Controller\EditBookController::editBook
+
+get_chapter:
+    path: /chapter/{chapterId}
+    methods: GET
+    controller: App\BookEditorBundle\Controller\GetChapterController::getChapter
+    requirements:
+        chapterId: '\d+'

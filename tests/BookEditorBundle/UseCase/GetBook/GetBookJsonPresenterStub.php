@@ -2,10 +2,9 @@
 
 namespace Tests\BookEditorBundle\UseCase\GetBook;
 
-use App\BookEditorBundle\UseCase\GetBook\Entity\Book;
+use App\BookEditorBundle\Entity\Book;
 use App\BookEditorBundle\UseCase\GetBook\GetBookJsonPresenter;
 use Symfony\Component\HttpFoundation\Response;
-use Exception;
 
 class GetBookJsonPresenterStub extends GetBookJsonPresenter
 {
@@ -20,11 +19,6 @@ class GetBookJsonPresenterStub extends GetBookJsonPresenter
     public function getBook(): Book
     {
         return $this->book;
-    }
-
-    public function getException(): Exception
-    {
-        return $this->exception;
     }
 
     public function setJsonString(string $jsonString): GetBookJsonPresenterStub

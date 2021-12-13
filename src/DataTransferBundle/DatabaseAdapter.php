@@ -11,6 +11,8 @@ class DatabaseAdapter
     public function __construct(PDO $databaseConnection)
     {
         $this->databaseConnection = $databaseConnection;
+
+        $this->databaseConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
     public function getRow(string $sqlQuery): array
@@ -32,5 +34,15 @@ class DatabaseAdapter
         }
 
         return $rows;
+    }
+
+    public function executeQuery(string $sqlQuery)
+    {
+        $this->databaseConnection->exec($sqlQuery);
+    }
+
+    public function quote(string $string, int $type = PDO::PARAM_STR): string
+    {
+        return $this->databaseConnection->quote($string, $type);
     }
 }

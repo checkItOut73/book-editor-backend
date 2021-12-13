@@ -1,11 +1,11 @@
 <?php declare(strict_types = 1);
 
-namespace App\BookEditorBundle\UseCase\GetBook\Entity;
+namespace App\BookEditorBundle\Entity;
 
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \App\BookEditorBundle\UseCase\GetBook\Entity\Verse
+ * @covers \App\BookEditorBundle\Entity\Verse
  */
 class VerseTest extends TestCase
 {
@@ -14,10 +14,16 @@ class VerseTest extends TestCase
     public function setUp(): void
     {
         $this->verse = (new Verse())
+            ->setId(5643)
             ->setNumberInParagraph(12)
             ->setNumberInChapter(44)
             ->setText('Keine Ahnung was noch kommt...')
             ->setParagraphId(5);
+    }
+
+    public function testGetId()
+    {
+        $this->assertSame(5643, $this->verse->getId());
     }
 
     public function testGetNumberInParagraph()

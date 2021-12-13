@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace App\BookEditorBundle\UseCase\GetBook\Entity;
+namespace App\BookEditorBundle\Entity;
 
 class Paragraph
 {

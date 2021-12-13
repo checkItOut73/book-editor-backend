@@ -16,9 +16,11 @@ class GetParagraphsRepositoryStub extends GetParagraphsRepository
         // stub overrides constructor so that it can be instantiated without dependencies
     }
 
-    public function setParagraphsGroupedByChapterId(array $paragraphsGroupedByChapterId)
+    public function setParagraphsGroupedByChapterId(array $paragraphsGroupedByChapterId): GetParagraphsRepositoryStub
     {
         $this->paragraphsGroupedByChapterId = $paragraphsGroupedByChapterId;
+
+        return $this;
     }
 
     /**

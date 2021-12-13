@@ -2,15 +2,13 @@
 
 namespace App\BookEditorBundle\UseCase\GetBook;
 
-use App\BookEditorBundle\UseCase\GetBook\Entity\Book;
+use App\BookEditorBundle\Entity\Book;
 use PHPUnit\Framework\TestCase;
 use Tests\BookEditorBundle\UseCase\GetBook\Repository\GetChaptersRepositoryStub;
 use Tests\BookEditorBundle\UseCase\GetBook\GetBookJsonPresenterStub;
-use App\BookEditorBundle\UseCase\GetBook\Entity\Chapter;
-use App\BookEditorBundle\UseCase\GetBook\Entity\Paragraph;
-use App\BookEditorBundle\UseCase\GetBook\Entity\Verse;
-use App\BookEditorBundle\UseCase\GetBook\Exception\BookNotFoundException;
-use Symfony\Component\HttpFoundation\Response;
+use App\BookEditorBundle\Entity\Chapter;
+use App\BookEditorBundle\Entity\Paragraph;
+use App\BookEditorBundle\Entity\Verse;
 use Tests\BookEditorBundle\UseCase\GetBook\Repository\GetBookRepositoryStub;
 use Tests\BookEditorBundle\UseCase\GetBook\Repository\GetParagraphsRepositoryStub;
 use Tests\BookEditorBundle\UseCase\GetBook\Repository\GetVersesRepositoryStub;
@@ -432,15 +430,5 @@ class GetBookInteractorTest extends TestCase
                 ]),
             $this->presenter->getBook()
         );
-    }
-
-    public function testExecutePutsAnExceptionCorrectlyIntoThePresenter()
-    {
-        $exception = new BookNotFoundException('Book not found!');
-        $this->getBookRepository->setException($exception);
-
-        $this->interactor->execute(5);
-
-        $this->assertEquals($exception, $this->presenter->getException());
     }
 }

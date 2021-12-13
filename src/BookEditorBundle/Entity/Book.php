@@ -1,14 +1,14 @@
 <?php declare(strict_types = 1);
 
-namespace App\BookEditorBundle\UseCase\GetBook\Entity;
+namespace App\BookEditorBundle\Entity;
 
 class Book
 {
     private int $id;
-    private string $title;
+    private ?string $title = null; // default must not be '' to keep title if field is not given
 
     /** @var array<Chapter> $chapters */
-    private array $chapters;
+    private ?array $chapters = null; // default must not be [] to keep chapters if field is not given
 
     public function setId(int $id): Book
     {
@@ -29,6 +29,11 @@ class Book
         return $this;
     }
 
+    public function isTitleNull(): bool
+    {
+        return is_null($this->title);
+    }
+
     public function getTitle(): string
     {
         return $this->title;
@@ -43,6 +48,11 @@ class Book
         $this->chapters = $chapters;
 
         return $this;
+    }
+
+    public function areChaptersNull(): bool
+    {
+        return is_null($this->chapters);
     }
 
     /**

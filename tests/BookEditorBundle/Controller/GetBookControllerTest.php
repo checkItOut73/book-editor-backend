@@ -40,14 +40,19 @@ class GetBookControllerTest extends TestCase
     public function testGetBookReturnsTheCorrectResponse()
     {
         $this->getBookPresenter
-            ->setJsonString('[{"number":1,"heading":"You have to read this!","paragraphs":[]}]')
+            ->setJsonString(
+                '{' .
+                    '"title":"Book title",' .
+                    '"chapters":[{"number":1,"heading":"You have to read this!","paragraphs":[]}]' .
+                '}'
+            )
             ->setHttpStatusCode(Response::HTTP_OK);
 
         $this->assertEquals(
             new Response(
-                '[{"number":1,"heading":"You have to read this!","paragraphs":[]}]',
+                '{"title":"Book title","chapters":[{"number":1,"heading":"You have to read this!","paragraphs":[]}]}',
                 Response::HTTP_OK,
-                ['Book-type' => 'application/json']
+                ['Content-type' => 'application/json']
             ),
             $this->controller->getBook($this->request)
         );

@@ -3,7 +3,7 @@
 namespace App\BookEditorBundle\UseCase\GetBook\Repository;
 
 use App\DataTransferBundle\DatabaseAdapter;
-use App\BookEditorBundle\UseCase\GetBook\Entity\Chapter;
+use App\BookEditorBundle\Entity\Chapter;
 
 class GetChaptersRepository
 {

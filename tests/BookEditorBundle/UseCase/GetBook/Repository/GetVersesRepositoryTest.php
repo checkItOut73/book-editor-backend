@@ -2,7 +2,7 @@
 
 namespace App\BookEditorBundle\UseCase\GetBook\Repository;
 
-use App\BookEditorBundle\UseCase\GetBook\Entity\Verse;
+use App\BookEditorBundle\Entity\Verse;
 use PHPUnit\Framework\TestCase;
 use Tests\DataTransferBundle\DatabaseAdapterStub;
 
@@ -34,30 +34,35 @@ class GetVersesRepositoryTest extends TestCase
     {
         $this->databaseAdapter->setRows([
             [
+                'id' => '49823',
                 'numberInParagraph' => '1',
                 'text' => 'Die Leipziger Wasserkünste waren technische Einrichtungen, die ' .
                     'über drei Jahrhunderte die zentrale Wasserversorgung Leipzigs sicherten.',
                 'paragraphId' => '1'
             ],
             [
+                'id' => '49824',
                 'numberInParagraph' => '2',
                 'text' => 'Von einem Vorläufer abgesehen, waren es zwei Wasserförderanlagen am ' .
                     'Pleißemühlgraben mit den Namen Rote Wasserkunst und Schwarze Wasserkunst.',
                 'paragraphId' => '1'
             ],
             [
+                'id' => '49825',
                 'numberInParagraph' => '1',
                 'text' => 'Die „Rote“ hatte Tür- und Fenstereinfassungen aus rotem Rochlitzer ' .
                     'Porphyr, was der „Schwarzen“ fehlte.',
                 'paragraphId' => '2'
             ],
             [
+                'id' => '49826',
                 'numberInParagraph' => '1',
                 'text' => 'Die Rote Wasserkunst befand sich auf dem Gelände der Nonnenmühle östlich von ' .
                     'dieser. Das entspricht heute dem Kreuzungsbereich Karl-Tauchnitz-Straße/Martin-Luther-Ring (♁⊙).',
                 'paragraphId' => '3'
             ],
             [
+                'id' => '49827',
                 'numberInParagraph' => '2',
                 'text' => 'Die Schwarze Wasserkunst lag etwa 100 Meter südlich davon an der ' .
                     'Harkortstraße (bis 1876 An der Wasserkunst) gegenüber der Brücke zu ' .
@@ -71,6 +76,7 @@ class GetVersesRepositoryTest extends TestCase
             [
                 1 => [
                     (new Verse())
+                        ->setId(49823)
                         ->setNumberInParagraph(1)
                         ->setText(
                             'Die Leipziger Wasserkünste waren technische Einrichtungen, die über ' .
@@ -78,6 +84,7 @@ class GetVersesRepositoryTest extends TestCase
                         )
                         ->setParagraphId(1),
                     (new Verse())
+                        ->setId(49824)
                         ->setNumberInParagraph(2)
                         ->setText(
                             'Von einem Vorläufer abgesehen, waren es zwei Wasserförderanlagen am ' .
@@ -87,6 +94,7 @@ class GetVersesRepositoryTest extends TestCase
                 ],
                 2 => [
                     (new Verse())
+                        ->setId(49825)
                         ->setNumberInParagraph(1)
                         ->setText(
                             'Die „Rote“ hatte Tür- und Fenstereinfassungen aus rotem Rochlitzer Porphyr, ' .
@@ -96,6 +104,7 @@ class GetVersesRepositoryTest extends TestCase
                 ],
                 3 => [
                     (new Verse())
+                        ->setId(49826)
                         ->setNumberInParagraph(1)
                         ->setText(
                             'Die Rote Wasserkunst befand sich auf dem Gelände der Nonnenmühle östlich von dieser. ' .
@@ -103,6 +112,7 @@ class GetVersesRepositoryTest extends TestCase
                         )
                         ->setParagraphId(3),
                     (new Verse())
+                        ->setId(49827)
                         ->setNumberInParagraph(2)
                         ->setText(
                             'Die Schwarze Wasserkunst lag etwa 100 Meter südlich davon an der Harkortstraße ' .

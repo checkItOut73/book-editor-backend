@@ -4,7 +4,7 @@ namespace App\BookEditorBundle\UseCase\GetBook\Repository;
 
 use PHPUnit\Framework\TestCase;
 use Tests\DataTransferBundle\DatabaseAdapterStub;
-use App\BookEditorBundle\UseCase\GetBook\Entity\Chapter;
+use App\BookEditorBundle\Entity\Chapter;
 
 /**
  * @covers \App\BookEditorBundle\UseCase\GetBook\Repository\GetChaptersRepository

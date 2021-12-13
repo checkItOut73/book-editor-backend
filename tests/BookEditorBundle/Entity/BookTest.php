@@ -1,11 +1,12 @@
 <?php declare(strict_types = 1);
 
-namespace App\BookEditorBundle\UseCase\GetBook\Entity;
+namespace App\BookEditorBundle\Entity;
 
 use PHPUnit\Framework\TestCase;
+use TypeError;
 
 /**
- * @covers \App\BookEditorBundle\UseCase\GetBook\Entity\Book
+ * @covers \App\BookEditorBundle\Entity\Book
  */
 class BookTest extends TestCase
 {
@@ -31,9 +32,21 @@ class BookTest extends TestCase
         $this->assertSame(2, $this->book->getId());
     }
 
+    public function testIsTitleNullReturnsWhetherTitleIsNull()
+    {
+        $this->assertFalse($this->book->isTitleNull());
+        $this->assertTrue((new Book())->isTitleNull());
+    }
+
     public function testGetTitle()
     {
         $this->assertSame('Ein Berg in einem See', $this->book->getTitle());
+    }
+
+    public function testAreChaptersNullReturnsWhetherChaptersAreNull()
+    {
+        $this->assertFalse($this->book->areChaptersNull());
+        $this->assertTrue((new Book())->areChaptersNull());
     }
 
     public function testGetChapters()
@@ -49,5 +62,13 @@ class BookTest extends TestCase
             ],
             $this->book->getChapters()
         );
+    }
+
+    public function testGetChaptersThrowsIfChaptersAreNotSet()
+    {
+        $this->expectException(TypeError::class);
+        $this->expectExceptionMessage('Return value must be of type array, null returned');
+
+        (new Book())->getChapters();
     }
 }

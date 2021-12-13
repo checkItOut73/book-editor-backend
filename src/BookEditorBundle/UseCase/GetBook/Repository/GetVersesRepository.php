@@ -2,7 +2,7 @@
 
 namespace App\BookEditorBundle\UseCase\GetBook\Repository;
 
-use App\BookEditorBundle\UseCase\GetBook\Entity\Verse;
+use App\BookEditorBundle\Entity\Verse;
 use App\DataTransferBundle\DatabaseAdapter;
 
 class GetVersesRepository
@@ -28,6 +28,7 @@ class GetVersesRepository
 
         foreach ($this->databaseAdapter->getRows($this->getQuery($paragraphIds)) as $row) {
             $versesList[$row['paragraphId']][] = (new Verse())
+                ->setId((int)$row['id'])
                 ->setNumberInParagraph((int)$row['numberInParagraph'])
                 ->setText($row['text'])
                 ->setParagraphId((int)$row['paragraphId']);

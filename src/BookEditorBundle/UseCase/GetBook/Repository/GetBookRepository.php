@@ -2,7 +2,7 @@
 
 namespace App\BookEditorBundle\UseCase\GetBook\Repository;
 
-use App\BookEditorBundle\UseCase\GetBook\Entity\Book;
+use App\BookEditorBundle\Entity\Book;
 use App\BookEditorBundle\UseCase\GetBook\Exception\BookNotFoundException;
 use App\DataTransferBundle\DatabaseAdapter;
 

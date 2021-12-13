@@ -1,11 +1,11 @@
 <?php declare(strict_types = 1);
 
-namespace App\BookEditorBundle\UseCase\GetBook\Entity;
+namespace App\BookEditorBundle\Entity;
 
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \App\BookEditorBundle\UseCase\GetBook\Entity\Chapter
+ * @covers \App\BookEditorBundle\Entity\Chapter
  */
 class ChapterTest extends TestCase
 {
@@ -33,6 +33,7 @@ class ChapterTest extends TestCase
 
     public function testGetId()
     {
+        $this->assertNull((new Chapter())->getId());
         $this->assertSame(5, $this->chapter->getId());
     }
 
@@ -43,6 +44,7 @@ class ChapterTest extends TestCase
 
     public function testGetHeading()
     {
+        $this->assertNull((new Chapter())->getHeading());
         $this->assertSame('Die Wanderung durch das Tal', $this->chapter->getHeading());
     }
 

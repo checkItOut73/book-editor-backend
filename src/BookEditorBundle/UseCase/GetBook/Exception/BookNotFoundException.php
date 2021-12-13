@@ -2,8 +2,8 @@
 
 namespace App\BookEditorBundle\UseCase\GetBook\Exception;
 
-use Exception;
+use App\BookEditorBundle\Exception\NotFoundException;
 
-class BookNotFoundException extends Exception
+class BookNotFoundException extends NotFoundException
 {
 }
