@@ -16,3 +16,8 @@ get_chapter:
     controller: App\BookEditorBundle\Controller\GetChapterController::getChapter
     requirements:
         chapterId: '\d+'
+
+edit_chapter:
+    path: /chapter/{chapterId}
+    methods: PUT
+    controller: App\BookEditorBundle\Controller\EditChapterController::editChapter

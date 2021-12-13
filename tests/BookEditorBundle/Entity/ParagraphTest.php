@@ -42,6 +42,7 @@ class ParagraphTest extends TestCase
 
     public function testGetId()
     {
+        $this->assertNull((new Paragraph())->getId());
         $this->assertSame(2, $this->paragraph->getId());
     }
 
@@ -52,6 +53,7 @@ class ParagraphTest extends TestCase
 
     public function testGetHeading()
     {
+        $this->assertNull((new Paragraph())->getHeading());
         $this->assertSame('Der Stein der Weisen', $this->paragraph->getHeading());
     }
 

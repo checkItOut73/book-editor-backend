@@ -4,9 +4,9 @@ namespace App\BookEditorBundle\Entity;
 
 class Paragraph
 {
-    private int $id;
+    private ?int $id = null; // allow null for new chapters
     private int $numberInChapter;
-    private string $heading;
+    private ?string $heading = null; // default must not be '' to keep heading if field is not given
     private int $chapterId;
 
     /** @var array<Verse> $verses */
@@ -19,7 +19,7 @@ class Paragraph
         return $this;
     }
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -43,7 +43,7 @@ class Paragraph
         return $this;
     }
 
-    public function getHeading(): string
+    public function getHeading(): ?string
     {
         return $this->heading;
     }
