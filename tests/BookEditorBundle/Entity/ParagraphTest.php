@@ -3,6 +3,7 @@
 namespace App\BookEditorBundle\Entity;
 
 use PHPUnit\Framework\TestCase;
+use TypeError;
 
 /**
  * @covers \App\BookEditorBundle\Entity\Paragraph
@@ -53,6 +54,12 @@ class ParagraphTest extends TestCase
         $this->assertSame(22, $this->paragraph->getNumberInChapter());
     }
 
+    public function testIsHeadingNullReturnsWhetherHeadingIsNull()
+    {
+        $this->assertFalse($this->paragraph->isHeadingNull());
+        $this->assertTrue((new Paragraph())->isHeadingNull());
+    }
+
     public function testGetHeading()
     {
         $this->assertNull((new Paragraph())->getHeading());
@@ -72,6 +79,12 @@ class ParagraphTest extends TestCase
     public function testGetVerseNumberInChapterOffset()
     {
         $this->assertSame(48932, $this->paragraph->getVerseNumberInChapterOffset());
+    }
+
+    public function testAreVersesNullReturnsWhetherVersesAreNull()
+    {
+        $this->assertFalse($this->paragraph->areVersesNull());
+        $this->assertTrue((new Paragraph())->areVersesNull());
     }
 
     public function testGetVerses()
@@ -99,5 +112,13 @@ class ParagraphTest extends TestCase
             ],
             $this->paragraph->getVerses()
         );
+    }
+
+    public function testGetVersesThrowsIfVersesAreNotSet()
+    {
+        $this->expectException(TypeError::class);
+        $this->expectExceptionMessage('Return value must be of type array, null returned');
+
+        (new Paragraph())->getVerses();
     }
 }

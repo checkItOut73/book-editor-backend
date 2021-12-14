@@ -23,6 +23,7 @@ class VerseTest extends TestCase
 
     public function testGetId()
     {
+        $this->assertNull((new Verse())->getId());
         $this->assertSame(5643, $this->verse->getId());
     }
 
@@ -36,8 +37,9 @@ class VerseTest extends TestCase
         $this->assertSame(44, $this->verse->getNumberInChapter());
     }
 
-    public function testGetHeading()
+    public function testGetText()
     {
+        $this->assertNull((new Verse())->getText());
         $this->assertSame('Keine Ahnung was noch kommt...', $this->verse->getText());
     }
 

@@ -4,10 +4,10 @@ namespace App\BookEditorBundle\Entity;
 
 class Verse
 {
-    private int $id;
+    private ?int $id = null; // allow null for new verses
     private int $numberInParagraph;
     private int $numberInChapter;
-    private string $text;
+    private ?string $text = null; // default must not be '' to keep text if field is not given
     private int $paragraphId;
 
     public function setId(int $id): Verse
@@ -17,7 +17,7 @@ class Verse
         return $this;
     }
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -53,7 +53,7 @@ class Verse
         return $this;
     }
 
-    public function getText(): string
+    public function getText(): ?string
     {
         return $this->text;
     }

@@ -23,13 +23,6 @@ class EditChapterRequestHandlerStub extends EditChapterRequestHandler
         return $this;
     }
 
-    public function setException(BadRequestException $exception): EditChapterRequestHandlerStub
-    {
-        $this->exception = $exception;
-
-        return $this;
-    }
-
     /**
      * @param string $jsonString
      * @return Chapter
@@ -38,10 +31,6 @@ class EditChapterRequestHandlerStub extends EditChapterRequestHandler
     public function getChapterEntityFromJsonString(string $jsonString): Chapter
     {
         $this->getChapterEntityCalls[] = [$jsonString];
-
-        if (isset($this->exception)) {
-            throw $this->exception;
-        }
 
         return $this->chapterEntity;
     }

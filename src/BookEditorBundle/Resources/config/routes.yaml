@@ -28,3 +28,8 @@ get_paragraph:
     controller: App\BookEditorBundle\Controller\GetParagraphController::getParagraph
     requirements:
         paragraphId: '\d+'
+
+edit_paragraph:
+    path: /paragraph/{paragraphId}
+    methods: PATCH
+    controller: App\BookEditorBundle\Controller\EditParagraphController::editParagraph

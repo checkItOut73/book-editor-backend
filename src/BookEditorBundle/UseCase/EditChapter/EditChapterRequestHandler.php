@@ -15,7 +15,7 @@ class EditChapterRequestHandler
      * @return Chapter
      * @throws BadRequestException
      */
-    // TODO add index of paragraph and chapter in error messages
+    // TODO add index of paragraph and verse in error messages
     public function getChapterEntityFromJsonString(string $jsonString): Chapter
     {
         $chapterJson = json_decode($jsonString, true);
@@ -25,14 +25,6 @@ class EditChapterRequestHandler
         }
 
         $chapter = new Chapter();
-
-        if (isset($chapterJson['id'])) {
-            try {
-                $chapter->setId($chapterJson['id']);
-            } catch (Error $e) {
-                throw new BadRequestException('The given chapter id is invalid!');
-            }
-        }
 
         if (isset($chapterJson['heading'])) {
             try {

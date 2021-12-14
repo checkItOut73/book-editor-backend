@@ -23,13 +23,6 @@ class EditBookRequestHandlerStub extends EditBookRequestHandler
         return $this;
     }
 
-    public function setException(BadRequestException $exception): EditBookRequestHandlerStub
-    {
-        $this->exception = $exception;
-
-        return $this;
-    }
-
     /**
      * @param string $jsonString
      * @return Book
@@ -38,10 +31,6 @@ class EditBookRequestHandlerStub extends EditBookRequestHandler
     public function getBookEntityFromJsonString(string $jsonString): Book
     {
         $this->getBookEntityCalls[] = [$jsonString];
-
-        if (isset($this->exception)) {
-            throw $this->exception;
-        }
 
         return $this->bookEntity;
     }

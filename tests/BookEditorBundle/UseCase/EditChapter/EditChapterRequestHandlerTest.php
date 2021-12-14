@@ -167,7 +167,7 @@ class EditChapterRequestHandlerTest extends TestCase
         $this->requestHandler->getChapterEntityFromJsonString('{"paragraphs":123}');
     }
 
-    public function testGetChapterEntityFromJsonStringDoesNotSetParagraphIdOrParagraphHeadingOrParagraphVersesIfNotGiven()
+    public function testGetChapterEntityFromJsonStringDoesNotSetParagraphIdOrHeadingOrVersesIfNotGiven()
     {
         $this->assertEquals(
             (new Chapter())
