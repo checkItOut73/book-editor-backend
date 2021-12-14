@@ -26,7 +26,6 @@ class GetParagraphJsonPresenterTest extends TestCase
                 ->setId(67)
                 ->setNumberInChapter(1)
                 ->setHeading('Der Karottensalat')
-                ->setChapterId(12)
                 ->setVerses([
                     (new Verse())
                         ->setId(49826)
@@ -57,6 +56,8 @@ class GetParagraphJsonPresenterTest extends TestCase
                         )
                         ->setParagraphId(67)
                 ])
+                ->setChapterId(12)
+                ->setBookId(3)
         );
 
         $this->assertEquals(
@@ -92,7 +93,9 @@ class GetParagraphJsonPresenterTest extends TestCase
                             'zudem Gegenstände aus den Kirchenschätzen, die sog. ' .
                             'Kleinkunst, analysiert.'
                     ]
-                ]
+                ],
+                'chapterId' => 12,
+                'bookId' => 3
             ]),
             $this->presenter->getJsonString()
         );

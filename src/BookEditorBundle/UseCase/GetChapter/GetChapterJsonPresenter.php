@@ -27,7 +27,8 @@ class GetChapterJsonPresenter
             'id' => $this->chapter->getId(),
             'number' => $this->chapter->getNumber(),
             'heading' => $this->chapter->getHeading(),
-            'paragraphs' => array_map([$this, 'getParagraphJsonData'], $this->chapter->getParagraphs())
+            'paragraphs' => array_map([$this, 'getParagraphJsonData'], $this->chapter->getParagraphs()),
+            'bookId' => $this->chapter->getBookId()
         ]);
     }
 

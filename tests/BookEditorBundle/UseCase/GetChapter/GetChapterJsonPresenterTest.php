@@ -115,6 +115,7 @@ class GetChapterJsonPresenterTest extends TestCase
                                 ->setParagraphId(69),
                         ])
                 ])
+                ->setBookId(2)
         );
 
         $this->assertEquals(
@@ -202,7 +203,8 @@ class GetChapterJsonPresenterTest extends TestCase
                             ]
                         ]
                     ]
-                ]
+                ],
+                'bookId' => 2
             ]),
             $this->presenter->getJsonString()
         );

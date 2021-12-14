@@ -31,6 +31,7 @@ class GetChapterRepository
         return (new Chapter())
             ->setId((int)$chapterRow['id'])
             ->setNumber((int)$chapterRow['number'])
-            ->setHeading($chapterRow['heading']);
+            ->setHeading($chapterRow['heading'])
+            ->setBookId((int)$chapterRow['bookId']);
     }
 }

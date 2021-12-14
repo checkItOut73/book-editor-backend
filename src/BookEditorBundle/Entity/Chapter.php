@@ -7,6 +7,7 @@ class Chapter
     private ?int $id = null; // allow null for new chapters
     private int $number;
     private ?string $heading = null; // default must not be '' to keep heading if field is not given
+    private int $bookId;
 
     /** @var array<Paragraph> $paragraphs */
     private ?array $paragraphs = null; // default must not be [] to keep paragraphs if field is not given
@@ -50,6 +51,18 @@ class Chapter
     public function getHeading(): ?string
     {
         return $this->heading;
+    }
+
+    public function setBookId(int $bookId): Chapter
+    {
+        $this->bookId = $bookId;
+
+        return $this;
+    }
+
+    public function getBookId(): int
+    {
+        return $this->bookId;
     }
 
     /**

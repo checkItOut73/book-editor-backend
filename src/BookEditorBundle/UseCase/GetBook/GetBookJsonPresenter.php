@@ -25,6 +25,7 @@ class GetBookJsonPresenter
     public function getJsonString(): string
     {
         return json_encode([
+            'id' => $this->book->getId(),
             'title' => $this->book->getTitle(),
             'chapters' => array_map([$this, 'getChapterJsonData'], $this->book->getChapters())
         ]);

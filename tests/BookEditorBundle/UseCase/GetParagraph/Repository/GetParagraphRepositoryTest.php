@@ -22,7 +22,9 @@ class GetParagraphRepositoryTest extends TestCase
                 'id' => '5',
                 'numberInChapter' => '2',
                 'verseNumberInChapterOffset' => '89432',
-                'heading' => 'Die Kuh macht muh'
+                'heading' => 'Die Kuh macht muh',
+                'chapterId' => '2',
+                'bookId' => '1'
             ]);
 
         $this->repository = new GetParagraphRepository($this->databaseAdapter);
@@ -55,7 +57,9 @@ class GetParagraphRepositoryTest extends TestCase
                 ->setId(5)
                 ->setNumberInChapter(2)
                 ->setVerseNumberInChapterOffset(89432)
-                ->setHeading('Die Kuh macht muh'),
+                ->setHeading('Die Kuh macht muh')
+                ->setChapterId(2)
+                ->setBookId(1),
             $this->repository->getParagraph(5)
         );
     }

@@ -18,6 +18,7 @@ class ChapterTest extends TestCase
             ->setId(5)
             ->setNumber(2)
             ->setHeading('Die Wanderung durch das Tal')
+            ->setBookId(1)
             ->setParagraphs([
                 (new Paragraph())
                     ->setId(23)
@@ -53,6 +54,11 @@ class ChapterTest extends TestCase
     {
         $this->assertNull((new Chapter())->getHeading());
         $this->assertSame('Die Wanderung durch das Tal', $this->chapter->getHeading());
+    }
+
+    public function testGetBookId()
+    {
+        $this->assertSame(1, $this->chapter->getBookId());
     }
 
     public function testAreParagraphsNullReturnsWhetherParagraphsAreNull()

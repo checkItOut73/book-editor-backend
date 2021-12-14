@@ -183,6 +183,7 @@ class GetBookJsonPresenterTest extends TestCase
 
         $this->assertEquals(
             json_encode([
+                'id' => 1,
                 'title' => 'A book',
                 'chapters' => [
                     [

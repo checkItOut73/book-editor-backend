@@ -26,7 +26,9 @@ class GetParagraphJsonPresenter
             'id' => $this->paragraph->getId(),
             'numberInChapter' => $this->paragraph->getNumberInChapter(),
             'heading' => $this->paragraph->getHeading(),
-            'verses' => array_map([$this, 'getVerseJsonData'], $this->paragraph->getVerses())
+            'verses' => array_map([$this, 'getVerseJsonData'], $this->paragraph->getVerses()),
+            'chapterId' => $this->paragraph->getChapterId(),
+            'bookId' => $this->paragraph->getBookId(),
         ]);
     }
 

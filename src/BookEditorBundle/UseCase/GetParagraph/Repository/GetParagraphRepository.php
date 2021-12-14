@@ -32,6 +32,8 @@ class GetParagraphRepository
             ->setId((int)$paragraphRow['id'])
             ->setNumberInChapter((int)$paragraphRow['numberInChapter'])
             ->setVerseNumberInChapterOffset((int)$paragraphRow['verseNumberInChapterOffset'])
-            ->setHeading($paragraphRow['heading']);
+            ->setHeading($paragraphRow['heading'])
+            ->setChapterId((int)$paragraphRow['chapterId'])
+            ->setBookId((int)$paragraphRow['bookId']);
     }
 }

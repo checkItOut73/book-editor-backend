@@ -21,7 +21,8 @@ class GetChapterRepositoryTest extends TestCase
             ->setRow([
                 'id' => '5',
                 'number' => '2',
-                'heading' => 'Die Kuh macht muh'
+                'heading' => 'Die Kuh macht muh',
+                'bookId' => '1'
             ]);
 
         $this->repository = new GetChapterRepository($this->databaseAdapter);
@@ -53,7 +54,8 @@ class GetChapterRepositoryTest extends TestCase
             (new Chapter())
                 ->setId(5)
                 ->setNumber(2)
-                ->setHeading('Die Kuh macht muh'),
+                ->setHeading('Die Kuh macht muh')
+                ->setBookId(1),
             $this->repository->getChapter(5)
         );
     }

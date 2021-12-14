@@ -18,6 +18,7 @@ class ParagraphTest extends TestCase
             ->setNumberInChapter(22)
             ->setHeading('Der Stein der Weisen')
             ->setChapterId(85)
+            ->setBookId(3)
             ->setVerseNumberInChapterOffset(48932)
             ->setVerses([
                 (new Verse())
@@ -61,6 +62,11 @@ class ParagraphTest extends TestCase
     public function testGetChapterId()
     {
         $this->assertSame(85, $this->paragraph->getChapterId());
+    }
+
+    public function testGetBookId()
+    {
+        $this->assertSame(3, $this->paragraph->getBookId());
     }
 
     public function testGetVerseNumberInChapterOffset()
