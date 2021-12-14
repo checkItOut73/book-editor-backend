@@ -16,9 +16,11 @@ class GetVersesRepositoryStub extends GetVersesRepository
         // stub overrides constructor so that it can be instantiated without dependencies
     }
 
-    public function setVersesGroupedByParagraphId(array $versesGroupedByParagraphId)
+    public function setVersesGroupedByParagraphId(array $versesGroupedByParagraphId): GetVersesRepositoryStub
     {
         $this->versesGroupedByParagraphId = $versesGroupedByParagraphId;
+
+        return $this;
     }
 
     /**

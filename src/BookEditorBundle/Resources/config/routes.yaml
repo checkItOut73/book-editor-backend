@@ -7,7 +7,7 @@ get_book:
 
 edit_book:
     path: /book/{bookId}
-    methods: PUT
+    methods: PATCH
     controller: App\BookEditorBundle\Controller\EditBookController::editBook
 
 get_chapter:
@@ -19,5 +19,12 @@ get_chapter:
 
 edit_chapter:
     path: /chapter/{chapterId}
-    methods: PUT
+    methods: PATCH
     controller: App\BookEditorBundle\Controller\EditChapterController::editChapter
+
+get_paragraph:
+    path: /paragraph/{paragraphId}
+    methods: GET
+    controller: App\BookEditorBundle\Controller\GetParagraphController::getParagraph
+    requirements:
+        paragraphId: '\d+'

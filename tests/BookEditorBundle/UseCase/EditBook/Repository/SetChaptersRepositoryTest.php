@@ -40,7 +40,7 @@ class SetChaptersRepositoryTest extends TestCase
                 'DECLARE @chapters ChaptersTable; ' .
                 'INSERT @chapters VALUES (432, NULL), (5934, Trust yourself | quoted with 2), ' .
                     '(NULL, Don\'t hesitate | quoted with 2); ' .
-                'EXEC setChapters @bookId = 5, @chapters;',
+                'EXEC setChapters @bookId = 5, @chapters = @chapters;',
             ],
             $this->databaseAdapter->getExecuteQueryCalls()
         );
@@ -55,7 +55,7 @@ class SetChaptersRepositoryTest extends TestCase
 
         $this->assertEquals(
             [
-                'DECLARE @chapters ChaptersTable; EXEC setChapters @bookId = 5, @chapters;',
+                'DECLARE @chapters ChaptersTable; EXEC setChapters @bookId = 5, @chapters = @chapters;',
             ],
             $this->databaseAdapter->getExecuteQueryCalls()
         );

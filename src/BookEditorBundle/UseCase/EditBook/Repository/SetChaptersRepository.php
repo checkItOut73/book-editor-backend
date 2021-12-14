@@ -26,7 +26,7 @@ class SetChaptersRepository
             $sqlQuery .= 'INSERT @chapters VALUES ' . $this->getQueryValues($chapters) . '; ';
         }
 
-        $sqlQuery .= 'EXEC setChapters @bookId = ' . $bookId . ', @chapters;';
+        $sqlQuery .= 'EXEC setChapters @bookId = ' . $bookId . ', @chapters = @chapters;';
 
         $this->databaseAdapter->executeQuery($sqlQuery);
     }

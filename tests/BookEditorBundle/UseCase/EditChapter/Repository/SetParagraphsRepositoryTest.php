@@ -40,7 +40,7 @@ class SetParagraphsRepositoryTest extends TestCase
                 'DECLARE @paragraphs ParagraphsTable; ' .
                 'INSERT @paragraphs VALUES (432, NULL), (5934, Trust yourself | quoted with 2), ' .
                     '(NULL, Don\'t hesitate | quoted with 2); ' .
-                'EXEC setParagraphs @chapterId = 5, @paragraphs;',
+                'EXEC setParagraphs @chapterId = 5, @paragraphs = @paragraphs;',
             ],
             $this->databaseAdapter->getExecuteQueryCalls()
         );
@@ -55,7 +55,7 @@ class SetParagraphsRepositoryTest extends TestCase
 
         $this->assertEquals(
             [
-                'DECLARE @paragraphs ParagraphsTable; EXEC setParagraphs @chapterId = 5, @paragraphs;',
+                'DECLARE @paragraphs ParagraphsTable; EXEC setParagraphs @chapterId = 5, @paragraphs = @paragraphs;',
             ],
             $this->databaseAdapter->getExecuteQueryCalls()
         );

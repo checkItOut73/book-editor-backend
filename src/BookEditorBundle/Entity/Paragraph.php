@@ -8,6 +8,7 @@ class Paragraph
     private int $numberInChapter;
     private ?string $heading = null; // default must not be '' to keep heading if field is not given
     private int $chapterId;
+    private int $verseNumberInChapterOffset;
 
     /** @var array<Verse> $verses */
     private array $verses;
@@ -58,6 +59,18 @@ class Paragraph
     public function getChapterId(): int
     {
         return $this->chapterId;
+    }
+
+    public function setVerseNumberInChapterOffset(int $verseNumberInChapterOffset): Paragraph
+    {
+        $this->verseNumberInChapterOffset = $verseNumberInChapterOffset;
+
+        return $this;
+    }
+
+    public function getVerseNumberInChapterOffset(): int
+    {
+        return $this->verseNumberInChapterOffset;
     }
 
     /**
