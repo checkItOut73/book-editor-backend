@@ -53,6 +53,11 @@ class Verse
         return $this;
     }
 
+    public function isTextNull(): bool
+    {
+        return is_null($this->text);
+    }
+
     public function getText(): ?string
     {
         return $this->text;

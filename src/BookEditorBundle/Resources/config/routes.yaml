@@ -33,3 +33,8 @@ edit_paragraph:
     path: /paragraph/{paragraphId}
     methods: PATCH
     controller: App\BookEditorBundle\Controller\EditParagraphController::editParagraph
+
+edit_verse:
+    path: /verse/{verseId}
+    methods: PATCH
+    controller: App\BookEditorBundle\Controller\EditVerseController::editVerse

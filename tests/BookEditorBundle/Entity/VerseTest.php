@@ -37,6 +37,12 @@ class VerseTest extends TestCase
         $this->assertSame(44, $this->verse->getNumberInChapter());
     }
 
+    public function testIsTextNullReturnsWhetherTextIsNull()
+    {
+        $this->assertFalse($this->verse->isTextNull());
+        $this->assertTrue((new Verse())->isTextNull());
+    }
+
     public function testGetText()
     {
         $this->assertNull((new Verse())->getText());
