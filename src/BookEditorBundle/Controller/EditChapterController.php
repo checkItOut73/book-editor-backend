@@ -20,7 +20,7 @@ class EditChapterController extends AbstractController
         $this->editChapterInteractor->execute($request->get('chapterId'), $request->getContent());
 
         return new Response(
-            '{"success":{"message":"Changes have been applied successfully!"}}',
+            '{"success":{"message":"Die Änderungen wurden erfolgreich übernommen!"}}',
             Response::HTTP_OK,
             ['Content-type' => 'application/json']
         );

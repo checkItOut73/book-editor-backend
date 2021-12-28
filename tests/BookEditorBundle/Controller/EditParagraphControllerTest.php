@@ -38,7 +38,7 @@ class EditParagraphControllerTest extends TestCase
     {
         $this->assertEquals(
             new Response(
-                '{"message":"Changes have been applied successfully!"}',
+                '{"success":{"message":"Die Änderungen wurden erfolgreich übernommen!"}}',
                 Response::HTTP_OK,
                 ['Content-type' => 'application/json']
             ),
