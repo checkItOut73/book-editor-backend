@@ -9,6 +9,8 @@ edit_book:
     path: /book/{bookId}
     methods: PATCH
     controller: App\BookEditorBundle\Controller\EditBookController::editBook
+    requirements:
+        bookId: '\d+'
 
 get_chapter:
     path: /chapter/{chapterId}
@@ -21,6 +23,8 @@ edit_chapter:
     path: /chapter/{chapterId}
     methods: PATCH
     controller: App\BookEditorBundle\Controller\EditChapterController::editChapter
+    requirements:
+        chapterId: '\d+'
 
 get_paragraph:
     path: /paragraph/{paragraphId}
@@ -33,8 +37,20 @@ edit_paragraph:
     path: /paragraph/{paragraphId}
     methods: PATCH
     controller: App\BookEditorBundle\Controller\EditParagraphController::editParagraph
+    requirements:
+        paragraphId: '\d+'
 
 edit_verse:
     path: /verse/{verseId}
     methods: PATCH
     controller: App\BookEditorBundle\Controller\EditVerseController::editVerse
+    requirements:
+        verseId: '\d+'
+
+delete_verse:
+    path: /verse/{verseId}
+    methods: DELETE
+    controller: App\BookEditorBundle\Controller\DeleteVerseController::deleteVerse
+    requirements:
+        verseId: '\d+'
+
