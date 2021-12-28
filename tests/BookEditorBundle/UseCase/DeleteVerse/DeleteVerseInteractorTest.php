@@ -2,7 +2,6 @@
 
 namespace App\BookEditorBundle\UseCase\DeleteVerse;
 
-use App\BookEditorBundle\Entity\Verse;
 use PHPUnit\Framework\TestCase;
 use Tests\BookEditorBundle\UseCase\DeleteVerse\Repository\DeleteVerseRepositoryStub;
 

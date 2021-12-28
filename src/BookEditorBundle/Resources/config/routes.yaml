@@ -26,6 +26,13 @@ edit_chapter:
     requirements:
         chapterId: '\d+'
 
+delete_chapter:
+    path: /chapter/{chapterId}
+    methods: DELETE
+    controller: App\BookEditorBundle\Controller\DeleteChapterController::deleteChapter
+    requirements:
+        chapterId: '\d+'
+
 get_paragraph:
     path: /paragraph/{paragraphId}
     methods: GET
@@ -37,6 +44,13 @@ edit_paragraph:
     path: /paragraph/{paragraphId}
     methods: PATCH
     controller: App\BookEditorBundle\Controller\EditParagraphController::editParagraph
+    requirements:
+        paragraphId: '\d+'
+
+delete_paragraph:
+    path: /paragraph/{paragraphId}
+    methods: DELETE
+    controller: App\BookEditorBundle\Controller\DeleteParagraphController::deleteParagraph
     requirements:
         paragraphId: '\d+'
 
