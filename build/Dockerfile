@@ -21,8 +21,8 @@ RUN ACCEPT_EULA=Y apt-get install msodbcsql17 -y
 RUN apt-get install unixodbc-dev -y
 
 # install sqlsrv for msssql
-RUN pecl install sqlsrv
-RUN pecl install pdo_sqlsrv
+RUN pecl install sqlsrv-5.10.0beta2
+RUN pecl install pdo_sqlsrv-5.10.0beta2
 
 # use production php.ini
 RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini

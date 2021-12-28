@@ -20,7 +20,7 @@ class EditParagraphController extends AbstractController
         $this->editParagraphInteractor->execute($request->get('paragraphId'), $request->getContent());
 
         return new Response(
-            '{"message":"Changes have been applied successfully!"}',
+            '{"success":{"message":"Changes have been applied successfully!"}}',
             Response::HTTP_OK,
             ['Content-type' => 'application/json']
         );
