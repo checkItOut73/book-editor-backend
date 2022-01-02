@@ -11,16 +11,19 @@ class EditParagraphInteractor
     private EditParagraphRequestHandler $requestHandler;
     private SetParagraphHeadingRepository $setParagraphHeadingRepository;
     private SetVersesRepository $setVersesRepository;
+    private EditParagraphJsonPresenter $editParagraphPresenter;
     private Paragraph $paragraphEntitiy;
 
     public function __construct(
         EditParagraphRequestHandler $requestHandler,
         SetParagraphHeadingRepository $setParagraphHeadingRepository,
-        SetVersesRepository $setVersesRepository
+        SetVersesRepository $setVersesRepository,
+        EditParagraphJsonPresenter $editParagraphPresenter
     ) {
         $this->requestHandler = $requestHandler;
         $this->setParagraphHeadingRepository = $setParagraphHeadingRepository;
         $this->setVersesRepository = $setVersesRepository;
+        $this->editParagraphPresenter = $editParagraphPresenter;
     }
 
     public function execute(int $paragraphId, string $requestContent)
@@ -35,7 +38,12 @@ class EditParagraphInteractor
         }
 
         if (!$this->paragraphEntitiy->areVersesNull()) {
-            $this->setVersesRepository->setVersesAndGetResultVerses($paragraphId, $this->paragraphEntitiy->getVerses());
+            $this->editParagraphPresenter->setResultVerses(
+                $this->setVersesRepository->setVersesAndGetResultVerses(
+                    $paragraphId,
+                    $this->paragraphEntitiy->getVerses()
+                )
+            );
         }
     }
 }

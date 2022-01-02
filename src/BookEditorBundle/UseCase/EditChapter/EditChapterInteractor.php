@@ -11,16 +11,19 @@ class EditChapterInteractor
     private EditChapterRequestHandler $requestHandler;
     private SetChapterHeadingRepository $setChapterHeadingRepository;
     private SetParagraphsRepository $setParagraphsRepository;
+    private EditChapterJsonPresenter $editChapterPresenter;
     private Chapter $chapterEntitiy;
 
     public function __construct(
         EditChapterRequestHandler $requestHandler,
         SetChapterHeadingRepository $setChapterHeadingRepository,
-        SetParagraphsRepository $setParagraphsRepository
+        SetParagraphsRepository $setParagraphsRepository,
+        EditChapterJsonPresenter $editChapterPresenter
     ) {
         $this->requestHandler = $requestHandler;
         $this->setChapterHeadingRepository = $setChapterHeadingRepository;
         $this->setParagraphsRepository = $setParagraphsRepository;
+        $this->editChapterPresenter = $editChapterPresenter;
     }
 
     public function execute(int $chapterId, string $requestContent)
@@ -32,7 +35,12 @@ class EditChapterInteractor
         }
 
         if (!$this->chapterEntitiy->areParagraphsNull()) {
-            $this->setParagraphsRepository->setParagraphsAndGetResultParagraphs($chapterId, $this->chapterEntitiy->getParagraphs());
+            $this->editChapterPresenter->setResultParagraphs(
+                $this->setParagraphsRepository->setParagraphsAndGetResultParagraphs(
+                    $chapterId,
+                    $this->chapterEntitiy->getParagraphs()
+                )
+            );
         }
 
         // TODO handle nested field like verses of paragraphs

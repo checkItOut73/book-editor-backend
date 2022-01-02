@@ -5,6 +5,7 @@ namespace App\BookEditorBundle\UseCase\EditChapter;
 use App\BookEditorBundle\Entity\Chapter;
 use App\BookEditorBundle\Entity\Paragraph;
 use PHPUnit\Framework\TestCase;
+use Tests\BookEditorBundle\UseCase\EditChapter\EditChapterJsonPresenterStub;
 use Tests\BookEditorBundle\UseCase\EditChapter\EditChapterRequestHandlerStub;
 use Tests\BookEditorBundle\UseCase\EditChapter\Repository\SetChapterHeadingRepositoryStub;
 use Tests\BookEditorBundle\UseCase\EditChapter\Repository\SetParagraphsRepositoryStub;
@@ -17,6 +18,7 @@ class EditChapterInteractorTest extends TestCase
     private EditChapterRequestHandlerStub $requestHandler;
     private SetChapterHeadingRepositoryStub $setChapterHeadingRepository;
     private SetParagraphsRepositoryStub $setParagraphsRepository;
+    private EditChapterJsonPresenterStub $editChapterPresenter;
 
     private EditChapterInteractor $interactor;
 
@@ -26,11 +28,13 @@ class EditChapterInteractorTest extends TestCase
             ->setChapterEntity(new Chapter());
         $this->setChapterHeadingRepository = new SetChapterHeadingRepositoryStub();
         $this->setParagraphsRepository = new SetParagraphsRepositoryStub();
+        $this->editChapterPresenter = new EditChapterJsonPresenterStub();
 
         $this->interactor = new EditChapterInteractor(
             $this->requestHandler,
             $this->setChapterHeadingRepository,
-            $this->setParagraphsRepository
+            $this->setParagraphsRepository,
+            $this->editChapterPresenter
         );
     }
 
@@ -100,5 +104,38 @@ class EditChapterInteractorTest extends TestCase
         $this->interactor->execute(5, '{}');
 
         $this->assertEmpty($this->setParagraphsRepository->getSetParagraphsCalls());
+    }
+
+    public function testExecutePutsTheResultParagraphsCorrectlyIntoThePresenter()
+    {
+        $this->requestHandler->setChapterEntity(
+            (new Chapter())->setParagraphs([
+                (new Paragraph())
+                    ->setHeading('Der 1000-jährige Baum'),
+                (new Paragraph())
+                    ->setId(29392)
+            ])
+        );
+
+        $this->setParagraphsRepository->setResultParagraphs([
+            (new Paragraph())
+                ->setId(43932)
+                ->setHeading('Der 1000-jährige Baum'),
+            (new Paragraph())
+                ->setId(29392)
+        ]);
+
+        $this->interactor->execute(5, '{}');
+
+        $this->assertEquals(
+            [
+                (new Paragraph())
+                    ->setId(43932)
+                    ->setHeading('Der 1000-jährige Baum'),
+                (new Paragraph())
+                    ->setId(29392)
+            ],
+            $this->editChapterPresenter->getResultParagraphs()
+        );
     }
 }

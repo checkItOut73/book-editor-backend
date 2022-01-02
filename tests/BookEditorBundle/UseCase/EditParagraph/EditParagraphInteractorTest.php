@@ -5,6 +5,7 @@ namespace App\BookEditorBundle\UseCase\EditParagraph;
 use App\BookEditorBundle\Entity\Paragraph;
 use App\BookEditorBundle\Entity\Verse;
 use PHPUnit\Framework\TestCase;
+use Tests\BookEditorBundle\UseCase\EditParagraph\EditParagraphJsonPresenterStub;
 use Tests\BookEditorBundle\UseCase\EditParagraph\EditParagraphRequestHandlerStub;
 use Tests\BookEditorBundle\UseCase\EditParagraph\Repository\SetParagraphHeadingRepositoryStub;
 use Tests\BookEditorBundle\UseCase\EditParagraph\Repository\SetVersesRepositoryStub;
@@ -17,6 +18,7 @@ class EditParagraphInteractorTest extends TestCase
     private EditParagraphRequestHandlerStub $requestHandler;
     private SetParagraphHeadingRepositoryStub $setParagraphHeadingRepository;
     private SetVersesRepositoryStub $setVersesRepository;
+    private EditParagraphJsonPresenterStub $editParagraphPresenter;
 
     private EditParagraphInteractor $interactor;
 
@@ -26,11 +28,13 @@ class EditParagraphInteractorTest extends TestCase
             ->setParagraphEntity(new Paragraph());
         $this->setParagraphHeadingRepository = new SetParagraphHeadingRepositoryStub();
         $this->setVersesRepository = new SetVersesRepositoryStub();
+        $this->editParagraphPresenter = new EditParagraphJsonPresenterStub();
 
         $this->interactor = new EditParagraphInteractor(
             $this->requestHandler,
             $this->setParagraphHeadingRepository,
-            $this->setVersesRepository
+            $this->setVersesRepository,
+            $this->editParagraphPresenter
         );
     }
 
@@ -100,5 +104,47 @@ class EditParagraphInteractorTest extends TestCase
         $this->interactor->execute(5, '{}');
 
         $this->assertEmpty($this->setVersesRepository->getSetVersesCalls());
+    }
+
+    public function testExecutePutsTheResultVersesCorrectlyIntoThePresenter()
+    {
+        $this->requestHandler->setParagraphEntity(
+            (new Paragraph())->setVerses([
+                (new Verse())
+                    ->setText(
+                        'Im Emsland steht der stärkste Baum Deutschlands: ' .
+                        'Die „Tausendjährige Linde“ oder „Dicke Linde“ von Heede.'
+                    ),
+                (new Verse())
+                    ->setId(29392)
+            ])
+        );
+
+        $this->setVersesRepository->setResultVerses([
+            (new Verse())
+                ->setId(43932)
+                ->setText(
+                    'Im Emsland steht der stärkste Baum Deutschlands: ' .
+                    'Die „Tausendjährige Linde“ oder „Dicke Linde“ von Heede.'
+                ),
+            (new Verse())
+                ->setId(29392)
+        ]);
+
+        $this->interactor->execute(5, '{}');
+
+        $this->assertEquals(
+            [
+                (new Verse())
+                    ->setId(43932)
+                    ->setText(
+                        'Im Emsland steht der stärkste Baum Deutschlands: ' .
+                        'Die „Tausendjährige Linde“ oder „Dicke Linde“ von Heede.'
+                    ),
+                (new Verse())
+                    ->setId(29392)
+            ],
+            $this->editParagraphPresenter->getResultVerses()
+        );
     }
 }

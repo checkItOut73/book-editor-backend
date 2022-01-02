@@ -6,7 +6,7 @@ get_book:
         bookId: '\d+'
 
 edit_book:
-    path: /book/{bookId} # ?resultChaptersInResponse=1 to get chapters result
+    path: /book/{bookId} # ?resultChaptersInResponse=1 to get result chapters
     methods: PATCH
     controller: App\BookEditorBundle\Controller\EditBookController::editBook
     requirements:
@@ -20,7 +20,7 @@ get_chapter:
         chapterId: '\d+'
 
 edit_chapter:
-    path: /chapter/{chapterId}
+    path: /chapter/{chapterId} # ?resultParagraphsInResponse=1 to get result paragraphs
     methods: PATCH
     controller: App\BookEditorBundle\Controller\EditChapterController::editChapter
     requirements:
@@ -41,7 +41,7 @@ get_paragraph:
         paragraphId: '\d+'
 
 edit_paragraph:
-    path: /paragraph/{paragraphId}
+    path: /paragraph/{paragraphId} # ?resultVersesInResponse=1 to get result verses
     methods: PATCH
     controller: App\BookEditorBundle\Controller\EditParagraphController::editParagraph
     requirements:

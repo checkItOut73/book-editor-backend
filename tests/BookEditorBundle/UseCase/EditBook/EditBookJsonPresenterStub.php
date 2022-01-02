@@ -2,6 +2,7 @@
 
 namespace Tests\BookEditorBundle\UseCase\EditBook;
 
+use App\BookEditorBundle\Entity\Chapter;
 use App\BookEditorBundle\UseCase\EditBook\EditBookJsonPresenter;
 
 class EditBookJsonPresenterStub extends EditBookJsonPresenter
