@@ -7,5 +7,8 @@
     <include>
       <directory>../../src</directory>
     </include>
+    <exclude>
+      <file>../../src/Kernel.php</file>
+    </exclude>
   </coverage>
 </phpunit>
