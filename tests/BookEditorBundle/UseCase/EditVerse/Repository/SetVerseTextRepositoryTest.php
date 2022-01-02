@@ -24,7 +24,7 @@ class SetVerseTextRepositoryTest extends TestCase
         $this->repository->setVerseText(5, 'I\'ll tell you an amazing story...');
 
         $this->assertEquals(
-            ['EXEC setVerseText @verseId = 5, @text = I\'ll tell you an amazing story... | quoted with 2'],
+            ['EXEC setVerseText @verseId = 5, @text = \'I\'ll tell you an amazing story...\' | quoted with 2'],
             $this->databaseAdapter->getExecuteQueryCalls()
         );
     }

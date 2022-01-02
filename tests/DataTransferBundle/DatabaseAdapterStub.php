@@ -86,6 +86,6 @@ class DatabaseAdapterStub extends DatabaseAdapter
     {
         $this->quoteCalls[] = [$string, $type];
 
-        return $string . ' | quoted with ' . $type;
+        return '\'' . $string . '\' | quoted with ' . $type;
     }
 }

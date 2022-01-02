@@ -4,7 +4,6 @@ namespace App\BookEditorBundle\UseCase\EditBook;
 
 use App\BookEditorBundle\Entity\Book;
 use App\BookEditorBundle\Entity\Chapter;
-use App\BookEditorBundle\UseCase\EditBook\Exception\BadRequestException;
 use PHPUnit\Framework\TestCase;
 use Tests\BookEditorBundle\UseCase\EditBook\EditBookJsonPresenterStub;
 use Tests\BookEditorBundle\UseCase\EditBook\EditBookRequestHandlerStub;
@@ -19,6 +18,7 @@ class EditBookInteractorTest extends TestCase
     private EditBookRequestHandlerStub $requestHandler;
     private SetBookTitleRepositoryStub $setBookTitleRepository;
     private SetChaptersRepositoryStub $setChaptersRepository;
+    private EditBookJsonPresenterStub $editBookPresenter;
 
     private EditBookInteractor $interactor;
 
@@ -28,11 +28,13 @@ class EditBookInteractorTest extends TestCase
             ->setBookEntity(new Book());
         $this->setBookTitleRepository = new SetBookTitleRepositoryStub();
         $this->setChaptersRepository = new SetChaptersRepositoryStub();
+        $this->editBookPresenter = new EditBookJsonPresenterStub();
 
         $this->interactor = new EditBookInteractor(
             $this->requestHandler,
             $this->setBookTitleRepository,
-            $this->setChaptersRepository
+            $this->setChaptersRepository,
+            $this->editBookPresenter
         );
     }
 
@@ -102,5 +104,38 @@ class EditBookInteractorTest extends TestCase
         $this->interactor->execute(5, '{}');
 
         $this->assertEmpty($this->setChaptersRepository->getSetChaptersCalls());
+    }
+
+    public function testExecutePutsTheResultChaptersCorrectlyIntoThePresenter()
+    {
+        $this->requestHandler->setBookEntity(
+            (new Book())->setChapters([
+                (new Chapter())
+                    ->setHeading('Der 1000-jährige Baum'),
+                (new Chapter())
+                    ->setId(29392)
+            ])
+        );
+
+        $this->setChaptersRepository->setResultChapters([
+            (new Chapter())
+                ->setId(43932)
+                ->setHeading('Der 1000-jährige Baum'),
+            (new Chapter())
+                ->setId(29392)
+        ]);
+
+        $this->interactor->execute(5, '{}');
+
+        $this->assertEquals(
+            [
+                (new Chapter())
+                    ->setId(43932)
+                    ->setHeading('Der 1000-jährige Baum'),
+                (new Chapter())
+                    ->setId(29392)
+            ],
+            $this->editBookPresenter->getResultChapters()
+        );
     }
 }

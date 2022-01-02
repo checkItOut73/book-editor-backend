@@ -22,7 +22,7 @@ class GetParagraphsRepositoryTest extends TestCase
 
     public function testGetParagraphsPerformsTheCorrectQuery()
     {
-        $this->repository->getParagraphsGroupedByChapterId([1, 2, 3]);
+        $this->repository->getParagraphsGroupedByChapterId([1, 2, '3']);
 
         $this->assertEquals(
             ['EXEC getParagraphs @chapterIds = \'1,2,3\''],

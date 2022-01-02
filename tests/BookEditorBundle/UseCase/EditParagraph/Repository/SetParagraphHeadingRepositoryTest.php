@@ -24,7 +24,7 @@ class SetParagraphHeadingRepositoryTest extends TestCase
         $this->repository->setParagraphHeading(5, 'An amazing story...');
 
         $this->assertEquals(
-            ['EXEC setParagraphHeading @paragraphId = 5, @heading = An amazing story... | quoted with 2'],
+            ['EXEC setParagraphHeading @paragraphId = 5, @heading = \'An amazing story...\' | quoted with 2'],
             $this->databaseAdapter->getExecuteQueryCalls()
         );
     }

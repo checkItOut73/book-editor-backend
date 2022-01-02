@@ -2,14 +2,14 @@
 
 namespace App\BookEditorBundle\UseCase\DeleteVerse;
 
-use App\BookEditorBundle\Entity\Verse;
 use App\BookEditorBundle\UseCase\DeleteVerse\Repository\DeleteVerseRepository;
 
 class DeleteVerseInteractor
 {
     private DeleteVerseRepository $deleteVerseRepository;
 
-    public function __construct(DeleteVerseRepository $deleteVerseRepository) {
+    public function __construct(DeleteVerseRepository $deleteVerseRepository)
+    {
         $this->deleteVerseRepository = $deleteVerseRepository;
     }
 

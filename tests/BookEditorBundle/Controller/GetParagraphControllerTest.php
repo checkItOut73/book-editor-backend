@@ -40,8 +40,7 @@ class GetParagraphControllerTest extends TestCase
     public function testGetParagraphReturnsTheCorrectResponse()
     {
         $this->getParagraphPresenter
-            ->setJsonString('{"numberInChapter":1,"heading":"You have to read this!","verses":[]}')
-            ->setHttpStatusCode(Response::HTTP_OK);
+            ->setJsonString('{"numberInChapter":1,"heading":"You have to read this!","verses":[]}');
 
         $this->assertEquals(
             new Response(

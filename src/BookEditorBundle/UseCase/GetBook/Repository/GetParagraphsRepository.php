@@ -43,6 +43,13 @@ class GetParagraphsRepository
      */
     private function getQuery(array $chapterIds): string
     {
-        return 'EXEC getParagraphs @chapterIds = \'' . implode(',', $chapterIds) . '\'';
+        $castedChapterIds = array_map(
+            function ($chapterId) {
+                return (int)$chapterId;
+            },
+            $chapterIds
+        );
+
+        return 'EXEC getParagraphs @chapterIds = \'' . implode(',', $castedChapterIds) . '\'';
     }
 }

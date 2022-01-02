@@ -19,7 +19,7 @@ class DeleteChapterRepository
     public function deleteChapter(int $chapterId)
     {
         $this->databaseAdapter->executeQuery(
-            'EXEC deleteChapter @chapterId = ' . $chapterId
+            'EXEC deleteChapter @chapterId = ' . (int)$chapterId
         );
     }
 }

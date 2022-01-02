@@ -12,4 +12,5 @@ docker run \
     php8 \
         vendor/phpunit/phpunit/phpunit \
         --configuration build/configs/phpunit.xml.dist \
-        --coverage-html coverage
+        --coverage-html coverage \
+        $@

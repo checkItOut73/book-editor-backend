@@ -17,39 +17,50 @@ class SetParagraphsRepository
     /**
      * @param int $chapterId
      * @param array<Paragraph> $paragraphs
+     * @return array<Paragraph>
      */
-    public function setParagraphs(int $chapterId, array $paragraphs)
+    public function setParagraphsAndGetResultParagraphs(int $chapterId, array $paragraphs): array
     {
-        $sqlQuery = 'DECLARE @paragraphs ParagraphsTable; ';
-
-        if (!empty($paragraphs)) {
-            $sqlQuery .= 'INSERT @paragraphs VALUES ' . $this->getQueryValues($paragraphs) . '; ';
-        }
-
-        $sqlQuery .= 'EXEC setParagraphs @chapterId = ' . $chapterId . ', @paragraphs = @paragraphs;';
-
-        $this->databaseAdapter->executeQuery($sqlQuery);
+        return $this->getParagraphsOfResultRows(
+                $this->databaseAdapter->getRows(
+                'EXEC setParagraphs @chapterId = ' . (int)$chapterId . ', ' .
+                '@paragraphsJson = ' . $this->databaseAdapter->quote($this->getParagraphsJson($paragraphs))
+            )
+        );
     }
 
     /**
      * @param array<Paragraph> $paragraphs
      * @return string
      */
-    private function getQueryValues(array $paragraphs): string
+    private function getParagraphsJson(array $paragraphs): string
     {
-        return implode(
-            ', ',
-            array_map(
-                function (Paragraph $paragraph) {
-                    return '(' .
-                        ($paragraph->getId() ?? 'NULL') . ', ' .
-                        ($paragraph->getHeading() ?
-                            $this->databaseAdapter->quote($paragraph->getHeading()) :
-                            'NULL') .
-                    ')';
-                },
-                $paragraphs
-            )
-        );
+        return json_encode(array_map(
+            function (Paragraph $paragraph) {
+                return [
+                    'id' => ($paragraph->getId() ?? null),
+                    'heading' => ($paragraph->getHeading() ?? null)
+                ];
+            },
+            $paragraphs
+        ));
+    }
+
+    /**
+     * @param array $resultRows
+     * @return array<Paragraph>
+     */
+    private function getParagraphsOfResultRows(array $resultRows): array
+    {
+        return array_map(function ($row) {
+            $paragraph = (new Paragraph())
+                ->setId((int)$row['id']);
+
+            if (!is_null($row['heading'])) {
+                $paragraph->setHeading($row['heading']);
+            }
+
+            return $paragraph;
+        }, $resultRows);
     }
 }

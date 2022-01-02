@@ -35,7 +35,7 @@ class EditParagraphInteractor
         }
 
         if (!$this->paragraphEntitiy->areVersesNull()) {
-            $this->setVersesRepository->setVerses($paragraphId, $this->paragraphEntitiy->getVerses());
+            $this->setVersesRepository->setVersesAndGetResultVerses($paragraphId, $this->paragraphEntitiy->getVerses());
         }
     }
 }

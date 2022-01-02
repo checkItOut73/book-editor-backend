@@ -4,7 +4,6 @@ namespace App\BookEditorBundle\UseCase\GetParagraph;
 
 use App\BookEditorBundle\Entity\Paragraph;
 use App\BookEditorBundle\Entity\Verse;
-use Symfony\Component\HttpFoundation\Response;
 
 class GetParagraphJsonPresenter
 {
@@ -13,11 +12,6 @@ class GetParagraphJsonPresenter
     public function setParagraph(Paragraph $paragraph)
     {
         $this->paragraph = $paragraph;
-    }
-
-    public function getHttpStatusCode(): int
-    {
-        return Response::HTTP_OK;
     }
 
     public function getJsonString(): string

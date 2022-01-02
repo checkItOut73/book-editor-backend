@@ -2,14 +2,14 @@
 
 namespace App\BookEditorBundle\UseCase\DeleteChapter;
 
-use App\BookEditorBundle\Entity\Chapter;
 use App\BookEditorBundle\UseCase\DeleteChapter\Repository\DeleteChapterRepository;
 
 class DeleteChapterInteractor
 {
     private DeleteChapterRepository $deleteChapterRepository;
 
-    public function __construct(DeleteChapterRepository $deleteChapterRepository) {
+    public function __construct(DeleteChapterRepository $deleteChapterRepository)
+    {
         $this->deleteChapterRepository = $deleteChapterRepository;
     }
 

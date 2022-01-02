@@ -24,7 +24,7 @@ class SetBookTitleRepositoryTest extends TestCase
         $this->repository->setBookTitle(5, 'An amazing story...');
 
         $this->assertEquals(
-            ['EXEC setBookTitle @bookId = 5, @title = An amazing story... | quoted with 2'],
+            ['EXEC setBookTitle @bookId = 5, @title = \'An amazing story...\' | quoted with 2'],
             $this->databaseAdapter->getExecuteQueryCalls()
         );
     }

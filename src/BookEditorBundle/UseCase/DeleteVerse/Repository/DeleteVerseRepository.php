@@ -19,7 +19,7 @@ class DeleteVerseRepository
     public function deleteVerse(int $verseId)
     {
         $this->databaseAdapter->executeQuery(
-            'EXEC deleteVerse @verseId = ' . $verseId
+            'EXEC deleteVerse @verseId = ' . (int)$verseId
         );
     }
 }

@@ -17,39 +17,50 @@ class SetVersesRepository
     /**
      * @param int $paragraphId
      * @param array<Verse> $verses
+     * @return array<Verse>
      */
-    public function setVerses(int $paragraphId, array $verses)
+    public function setVersesAndGetResultVerses(int $paragraphId, array $verses): array
     {
-        $sqlQuery = 'DECLARE @verses VersesTable; ';
-
-        if (!empty($verses)) {
-            $sqlQuery .= 'INSERT @verses VALUES ' . $this->getQueryValues($verses) . '; ';
-        }
-
-        $sqlQuery .= 'EXEC setVerses @paragraphId = ' . $paragraphId . ', @verses = @verses;';
-
-        $this->databaseAdapter->executeQuery($sqlQuery);
+        return $this->getVersesOfResultRows(
+            $this->databaseAdapter->getRows(
+                'EXEC setVerses @paragraphId = ' . (int)$paragraphId . ', ' .
+                '@versesJson = ' . $this->databaseAdapter->quote($this->getVersesJson($verses))
+            )
+        );
     }
 
     /**
-     * @param array<Verses> $verses
+     * @param array<Verse> $verses
      * @return string
      */
-    private function getQueryValues(array $verses): string
+    private function getVersesJson(array $verses): string
     {
-        return implode(
-            ', ',
-            array_map(
-                function (Verse $verse) {
-                    return '(' .
-                        ($verse->getId() ?? 'NULL') . ', ' .
-                        ($verse->getText() ?
-                            $this->databaseAdapter->quote($verse->getText()) :
-                            'NULL') .
-                    ')';
-                },
-                $verses
-            )
-        );
+        return json_encode(array_map(
+            function (Verse $verse) {
+                return [
+                    'id' => ($verse->getId() ?? null),
+                    'text' => ($verse->getText() ?? null)
+                ];
+            },
+            $verses
+        ));
+    }
+
+    /**
+     * @param array $resultRows
+     * @return array<Verse>
+     */
+    private function getVersesOfResultRows(array $resultRows): array
+    {
+        return array_map(function ($row) {
+            $verse = (new Verse())
+                ->setId((int)$row['id']);
+
+            if (!is_null($row['text'])) {
+                $verse->setText($row['text']);
+            }
+
+            return $verse;
+        }, $resultRows);
     }
 }

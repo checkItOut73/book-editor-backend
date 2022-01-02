@@ -2,14 +2,14 @@
 
 namespace App\BookEditorBundle\UseCase\DeleteParagraph;
 
-use App\BookEditorBundle\Entity\Paragraph;
 use App\BookEditorBundle\UseCase\DeleteParagraph\Repository\DeleteParagraphRepository;
 
 class DeleteParagraphInteractor
 {
     private DeleteParagraphRepository $deleteParagraphRepository;
 
-    public function __construct(DeleteParagraphRepository $deleteParagraphRepository) {
+    public function __construct(DeleteParagraphRepository $deleteParagraphRepository)
+    {
         $this->deleteParagraphRepository = $deleteParagraphRepository;
     }
 

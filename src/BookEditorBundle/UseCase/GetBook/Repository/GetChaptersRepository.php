@@ -27,7 +27,7 @@ class GetChaptersRepository
                     ->setNumber((int)$row['number'])
                     ->setHeading($row['heading']);
             },
-            $this->databaseAdapter->getRows('EXEC getChapters @bookId = ' . $bookId)
+            $this->databaseAdapter->getRows('EXEC getChapters @bookId = ' . (int)$bookId)
         );
     }
 }

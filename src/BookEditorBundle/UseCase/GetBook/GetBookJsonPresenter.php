@@ -6,7 +6,6 @@ use App\BookEditorBundle\Entity\Book;
 use App\BookEditorBundle\Entity\Chapter;
 use App\BookEditorBundle\Entity\Paragraph;
 use App\BookEditorBundle\Entity\Verse;
-use Symfony\Component\HttpFoundation\Response;
 
 class GetBookJsonPresenter
 {
@@ -15,11 +14,6 @@ class GetBookJsonPresenter
     public function setBook(Book $book)
     {
         $this->book = $book;
-    }
-
-    public function getHttpStatusCode(): int
-    {
-        return Response::HTTP_OK;
     }
 
     public function getJsonString(): string

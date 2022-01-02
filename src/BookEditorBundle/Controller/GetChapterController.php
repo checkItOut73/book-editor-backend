@@ -26,7 +26,7 @@ class GetChapterController extends AbstractController
 
         return new Response(
             $this->getChapterPresenter->getJsonString(),
-            $this->getChapterPresenter->getHttpStatusCode(),
+            Response::HTTP_OK,
             ['Content-type' => 'application/json']
         );
     }

@@ -3,6 +3,7 @@
 namespace App\BookEditorBundle\UseCase\EditParagraph\Repository;
 
 use App\BookEditorBundle\Entity\Verse;
+use PDO;
 use PHPUnit\Framework\TestCase;
 use Tests\DataTransferBundle\DatabaseAdapterStub;
 
@@ -20,9 +21,9 @@ class SetVersesRepositoryTest extends TestCase
         $this->repository = new SetVersesRepository($this->databaseAdapter);
     }
 
-    public function testSetVersesPerformsTheCorrectQuery()
+    public function testSetVersesAndGetResultVersesPerformsTheCorrectQuery()
     {
-        $this->repository->setVerses(
+        $this->repository->setVersesAndGetResultVerses(
             5,
             [
                 (new Verse())
@@ -37,27 +38,69 @@ class SetVersesRepositoryTest extends TestCase
 
         $this->assertEquals(
             [
-                'DECLARE @verses VersesTable; ' .
-                'INSERT @verses VALUES (432, NULL), (5934, Trust yourself | quoted with 2), ' .
-                    '(NULL, Don\'t hesitate | quoted with 2); ' .
-                'EXEC setVerses @paragraphId = 5, @verses = @verses;',
+                'EXEC setVerses @paragraphId = 5, ' .
+                '@versesJson = \'[{"id":432,"text":null},{"id":5934,"text":"Trust yourself"},' .
+                '{"id":null,"text":"Don\'t hesitate"}]\' | quoted with ' . PDO::PARAM_STR,
             ],
-            $this->databaseAdapter->getExecuteQueryCalls()
+            $this->databaseAdapter->getGetRowsCalls()
         );
     }
 
-    public function testSetVersesDoesNotInsertIntoTempTableIfNoVersesAreGiven()
+    public function testSetVersesAndGetResultVersesPassesEmptyVersesJsonArrayIfNoVersesAreGiven()
     {
-        $this->repository->setVerses(
+        $this->repository->setVersesAndGetResultVerses(
             5,
             []
         );
 
         $this->assertEquals(
             [
-                'DECLARE @verses VersesTable; EXEC setVerses @paragraphId = 5, @verses = @verses;',
+                'EXEC setVerses @paragraphId = 5, @versesJson = \'[]\' | quoted with ' . PDO::PARAM_STR
             ],
-            $this->databaseAdapter->getExecuteQueryCalls()
+            $this->databaseAdapter->getGetRowsCalls()
+        );
+    }
+
+    public function testSetVersesAndGetResultVersesReturnsResultVersesCorrectly()
+    {
+        $this->databaseAdapter->setRows([
+            [
+                'id' => 432,
+                'text' => null
+            ],
+            [
+                'id' => 5934,
+                'text' => 'Trust yourself'
+            ],
+            [
+                'id' => 765345,
+                'text' => 'Don\'t hesitate'
+            ]
+        ]);
+
+        $this->assertEquals(
+            [
+                (new Verse())
+                    ->setId(432),
+                (new Verse())
+                    ->setId(5934)
+                    ->setText('Trust yourself'),
+                (new Verse())
+                    ->setId(765345)
+                    ->setText('Don\'t hesitate')
+            ],
+            $this->repository->setVersesAndGetResultVerses(
+                5,
+                [
+                    (new Verse())
+                        ->setId(432),
+                    (new Verse())
+                        ->setId(5934)
+                        ->setText('Trust yourself'),
+                    (new Verse())
+                        ->setText('Don\'t hesitate')
+                ]
+            )
         );
     }
 }

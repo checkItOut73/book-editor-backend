@@ -43,6 +43,13 @@ class GetVersesRepository
      */
     private function getQuery(array $paragraphIds): string
     {
-        return 'EXEC getVerses @paragraphIds = \'' . implode(',', $paragraphIds) . '\'';
+        $castedParagraphIds = array_map(
+            function ($paragraphId) {
+                return (int)$paragraphId;
+            },
+            $paragraphIds
+        );
+
+        return 'EXEC getVerses @paragraphIds = \'' . implode(',', $castedParagraphIds) . '\'';
     }
 }

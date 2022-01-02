@@ -45,8 +45,7 @@ class GetBookControllerTest extends TestCase
                     '"title":"Book title",' .
                     '"chapters":[{"number":1,"heading":"You have to read this!","paragraphs":[]}]' .
                 '}'
-            )
-            ->setHttpStatusCode(Response::HTTP_OK);
+            );
 
         $this->assertEquals(
             new Response(

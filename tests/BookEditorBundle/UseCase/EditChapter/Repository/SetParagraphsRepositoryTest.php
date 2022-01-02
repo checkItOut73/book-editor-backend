@@ -3,6 +3,7 @@
 namespace App\BookEditorBundle\UseCase\EditChapter\Repository;
 
 use App\BookEditorBundle\Entity\Paragraph;
+use PDO;
 use PHPUnit\Framework\TestCase;
 use Tests\DataTransferBundle\DatabaseAdapterStub;
 
@@ -20,9 +21,9 @@ class SetParagraphsRepositoryTest extends TestCase
         $this->repository = new SetParagraphsRepository($this->databaseAdapter);
     }
 
-    public function testSetParagraphsPerformsTheCorrectQuery()
+    public function testSetParagraphsAndGetResultParagraphsPerformsTheCorrectQuery()
     {
-        $this->repository->setParagraphs(
+        $this->repository->setParagraphsAndGetResultParagraphs(
             5,
             [
                 (new Paragraph())
@@ -37,27 +38,69 @@ class SetParagraphsRepositoryTest extends TestCase
 
         $this->assertEquals(
             [
-                'DECLARE @paragraphs ParagraphsTable; ' .
-                'INSERT @paragraphs VALUES (432, NULL), (5934, Trust yourself | quoted with 2), ' .
-                    '(NULL, Don\'t hesitate | quoted with 2); ' .
-                'EXEC setParagraphs @chapterId = 5, @paragraphs = @paragraphs;',
+                'EXEC setParagraphs @chapterId = 5, ' .
+                '@paragraphsJson = \'[{"id":432,"heading":null},{"id":5934,"heading":"Trust yourself"},' .
+                '{"id":null,"heading":"Don\'t hesitate"}]\' | quoted with ' . PDO::PARAM_STR,
             ],
-            $this->databaseAdapter->getExecuteQueryCalls()
+            $this->databaseAdapter->getGetRowsCalls()
         );
     }
 
-    public function testSetParagraphsDoesNotInsertIntoTempTableIfNoParagraphsAreGiven()
+    public function testSetParagraphsAndGetResultParagraphsPassesEmptyParagraphsJsonArrayIfNoParagraphsAreGiven()
     {
-        $this->repository->setParagraphs(
+        $this->repository->setParagraphsAndGetResultParagraphs(
             5,
             []
         );
 
         $this->assertEquals(
             [
-                'DECLARE @paragraphs ParagraphsTable; EXEC setParagraphs @chapterId = 5, @paragraphs = @paragraphs;',
+                'EXEC setParagraphs @chapterId = 5, @paragraphsJson = \'[]\' | quoted with ' . PDO::PARAM_STR
             ],
-            $this->databaseAdapter->getExecuteQueryCalls()
+            $this->databaseAdapter->getGetRowsCalls()
+        );
+    }
+
+    public function testSetParagraphsAndGetResultParagraphsReturnsResultParagraphsCorrectly()
+    {
+        $this->databaseAdapter->setRows([
+            [
+                'id' => 432,
+                'heading' => null
+            ],
+            [
+                'id' => 5934,
+                'heading' => 'Trust yourself'
+            ],
+            [
+                'id' => 765345,
+                'heading' => 'Don\'t hesitate'
+            ]
+        ]);
+
+        $this->assertEquals(
+            [
+                (new Paragraph())
+                    ->setId(432),
+                (new Paragraph())
+                    ->setId(5934)
+                    ->setHeading('Trust yourself'),
+                (new Paragraph())
+                    ->setId(765345)
+                    ->setHeading('Don\'t hesitate')
+            ],
+            $this->repository->setParagraphsAndGetResultParagraphs(
+                5,
+                [
+                    (new Paragraph())
+                        ->setId(432),
+                    (new Paragraph())
+                        ->setId(5934)
+                        ->setHeading('Trust yourself'),
+                    (new Paragraph())
+                        ->setHeading('Don\'t hesitate')
+                ]
+            )
         );
     }
 }

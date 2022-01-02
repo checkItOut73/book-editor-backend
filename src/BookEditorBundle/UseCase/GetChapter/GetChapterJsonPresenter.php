@@ -5,7 +5,6 @@ namespace App\BookEditorBundle\UseCase\GetChapter;
 use App\BookEditorBundle\Entity\Chapter;
 use App\BookEditorBundle\Entity\Paragraph;
 use App\BookEditorBundle\Entity\Verse;
-use Symfony\Component\HttpFoundation\Response;
 
 class GetChapterJsonPresenter
 {
@@ -14,11 +13,6 @@ class GetChapterJsonPresenter
     public function setChapter(Chapter $chapter)
     {
         $this->chapter = $chapter;
-    }
-
-    public function getHttpStatusCode(): int
-    {
-        return Response::HTTP_OK;
     }
 
     public function getJsonString(): string

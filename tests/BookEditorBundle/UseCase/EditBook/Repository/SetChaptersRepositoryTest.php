@@ -3,6 +3,7 @@
 namespace App\BookEditorBundle\UseCase\EditBook\Repository;
 
 use App\BookEditorBundle\Entity\Chapter;
+use PDO;
 use PHPUnit\Framework\TestCase;
 use Tests\DataTransferBundle\DatabaseAdapterStub;
 
@@ -20,9 +21,9 @@ class SetChaptersRepositoryTest extends TestCase
         $this->repository = new SetChaptersRepository($this->databaseAdapter);
     }
 
-    public function testSetChaptersPerformsTheCorrectQuery()
+    public function testSetChaptersAndGetResultChaptersPerformsTheCorrectQuery()
     {
-        $this->repository->setChapters(
+        $this->repository->setChaptersAndGetResultChapters(
             5,
             [
                 (new Chapter())
@@ -37,27 +38,69 @@ class SetChaptersRepositoryTest extends TestCase
 
         $this->assertEquals(
             [
-                'DECLARE @chapters ChaptersTable; ' .
-                'INSERT @chapters VALUES (432, NULL), (5934, Trust yourself | quoted with 2), ' .
-                    '(NULL, Don\'t hesitate | quoted with 2); ' .
-                'EXEC setChapters @bookId = 5, @chapters = @chapters;',
+                'EXEC setChapters @bookId = 5, ' .
+                '@chaptersJson = \'[{"id":432,"heading":null},{"id":5934,"heading":"Trust yourself"},' .
+                '{"id":null,"heading":"Don\'t hesitate"}]\' | quoted with ' . PDO::PARAM_STR,
             ],
-            $this->databaseAdapter->getExecuteQueryCalls()
+            $this->databaseAdapter->getGetRowsCalls()
         );
     }
 
-    public function testSetChaptersDoesNotInsertIntoTempTableIfNoChaptersAreGiven()
+    public function testSetChaptersAndGetResultChaptersPassesEmptyChaptersJsonArrayIfNoChaptersAreGiven()
     {
-        $this->repository->setChapters(
+        $this->repository->setChaptersAndGetResultChapters(
             5,
             []
         );
 
         $this->assertEquals(
             [
-                'DECLARE @chapters ChaptersTable; EXEC setChapters @bookId = 5, @chapters = @chapters;',
+                'EXEC setChapters @bookId = 5, @chaptersJson = \'[]\' | quoted with ' . PDO::PARAM_STR
             ],
-            $this->databaseAdapter->getExecuteQueryCalls()
+            $this->databaseAdapter->getGetRowsCalls()
+        );
+    }
+
+    public function testSetChaptersAndGetResultChaptersReturnsResultChaptersCorrectly()
+    {
+        $this->databaseAdapter->setRows([
+            [
+                'id' => 432,
+                'heading' => null
+            ],
+            [
+                'id' => 5934,
+                'heading' => 'Trust yourself'
+            ],
+            [
+                'id' => 765345,
+                'heading' => 'Don\'t hesitate'
+            ]
+        ]);
+
+        $this->assertEquals(
+            [
+                (new Chapter())
+                    ->setId(432),
+                (new Chapter())
+                    ->setId(5934)
+                    ->setHeading('Trust yourself'),
+                (new Chapter())
+                    ->setId(765345)
+                    ->setHeading('Don\'t hesitate')
+            ],
+            $this->repository->setChaptersAndGetResultChapters(
+                5,
+                [
+                    (new Chapter())
+                        ->setId(432),
+                    (new Chapter())
+                        ->setId(5934)
+                        ->setHeading('Trust yourself'),
+                    (new Chapter())
+                        ->setHeading('Don\'t hesitate')
+                ]
+            )
         );
     }
 }

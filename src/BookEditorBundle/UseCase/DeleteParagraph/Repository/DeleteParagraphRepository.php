@@ -19,7 +19,7 @@ class DeleteParagraphRepository
     public function deleteParagraph(int $paragraphId)
     {
         $this->databaseAdapter->executeQuery(
-            'EXEC deleteParagraph @paragraphId = ' . $paragraphId
+            'EXEC deleteParagraph @paragraphId = ' . (int)$paragraphId
         );
     }
 }

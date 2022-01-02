@@ -9,18 +9,32 @@ class SetChaptersRepositoryStub extends SetChaptersRepository
     /** @var array<array> $setChaptersCall */
     private $setChaptersCalls = [];
 
+    /** @var array<Chapter> $resultChapters */
+    private $resultChapters = [];
+
     public function __construct()
     {
         // stub overrides constructor so that it can be instantiated without dependencies
     }
 
     /**
+     * @param array<Chapter> $resultChapters
+     */
+    public function setResultChapters($resultChapters)
+    {
+        $this->resultChapters = $resultChapters;
+    }
+
+    /**
      * @param int $bookId
      * @param array<Chapter> $chapters
+     * @return array<Chapter>
      */
-    public function setChapters(int $bookId, array $chapters)
+    public function setChaptersAndGetResultChapters(int $bookId, array $chapters): array
     {
         $this->setChaptersCalls[] = [$bookId, $chapters];
+
+        return $this->resultChapters;
     }
 
     public function getSetChaptersCalls(): array

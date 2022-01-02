@@ -6,7 +6,7 @@ get_book:
         bookId: '\d+'
 
 edit_book:
-    path: /book/{bookId}
+    path: /book/{bookId} # ?resultChaptersInResponse=1 to get chapters result
     methods: PATCH
     controller: App\BookEditorBundle\Controller\EditBookController::editBook
     requirements:

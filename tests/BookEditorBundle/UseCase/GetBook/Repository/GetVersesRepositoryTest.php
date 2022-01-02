@@ -22,7 +22,7 @@ class GetVersesRepositoryTest extends TestCase
 
     public function testGetVersesPerformsTheCorrectQuery()
     {
-        $this->repository->getVersesGroupedByParagraphId([1, 2, 3]);
+        $this->repository->getVersesGroupedByParagraphId([1, 2, '3']);
 
         $this->assertEquals(
             ['EXEC getVerses @paragraphIds = \'1,2,3\''],

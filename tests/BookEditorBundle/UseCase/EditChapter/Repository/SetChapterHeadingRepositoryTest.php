@@ -24,7 +24,7 @@ class SetChapterHeadingRepositoryTest extends TestCase
         $this->repository->setChapterHeading(5, 'An amazing story...');
 
         $this->assertEquals(
-            ['EXEC setChapterHeading @chapterId = 5, @heading = An amazing story... | quoted with 2'],
+            ['EXEC setChapterHeading @chapterId = 5, @heading = \'An amazing story...\' | quoted with 2'],
             $this->databaseAdapter->getExecuteQueryCalls()
         );
     }

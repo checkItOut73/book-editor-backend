@@ -20,7 +20,7 @@ class SetBookTitleRepository
     public function setBookTitle(int $bookId, string $bookTitle)
     {
         $this->databaseAdapter->executeQuery(
-            'EXEC setBookTitle @bookId = ' . $bookId . ', @title = ' . $this->databaseAdapter->quote($bookTitle)
+            'EXEC setBookTitle @bookId = ' . (int)$bookId . ', @title = ' . $this->databaseAdapter->quote($bookTitle)
         );
     }
 }

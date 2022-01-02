@@ -26,7 +26,7 @@ class GetParagraphController extends AbstractController
 
         return new Response(
             $this->getParagraphPresenter->getJsonString(),
-            $this->getParagraphPresenter->getHttpStatusCode(),
+            Response::HTTP_OK,
             ['Content-type' => 'application/json']
         );
     }

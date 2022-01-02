@@ -40,8 +40,7 @@ class GetChapterControllerTest extends TestCase
     public function testGetChapterReturnsTheCorrectResponse()
     {
         $this->getChapterPresenter
-            ->setJsonString('{"number":1,"heading":"You have to read this!","paragraphs":[]}')
-            ->setHttpStatusCode(Response::HTTP_OK);
+            ->setJsonString('{"number":1,"heading":"You have to read this!","paragraphs":[]}');
 
         $this->assertEquals(
             new Response(

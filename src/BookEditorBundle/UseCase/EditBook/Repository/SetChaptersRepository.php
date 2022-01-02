@@ -17,39 +17,48 @@ class SetChaptersRepository
     /**
      * @param int $bookId
      * @param array<Chapter> $chapters
+     * @return array<Chapter>
      */
-    public function setChapters(int $bookId, array $chapters)
+    public function setChaptersAndGetResultChapters(int $bookId, array $chapters): array
     {
-        $sqlQuery = 'DECLARE @chapters ChaptersTable; ';
-
-        if (!empty($chapters)) {
-            $sqlQuery .= 'INSERT @chapters VALUES ' . $this->getQueryValues($chapters) . '; ';
-        }
-
-        $sqlQuery .= 'EXEC setChapters @bookId = ' . $bookId . ', @chapters = @chapters;';
-
-        $this->databaseAdapter->executeQuery($sqlQuery);
+        return $this->getChaptersOfResultRows($this->databaseAdapter->getRows(
+            'EXEC setChapters @bookId = ' . (int)$bookId . ', ' .
+            '@chaptersJson = ' . $this->databaseAdapter->quote($this->getChaptersJson($chapters))
+        ));
     }
 
     /**
      * @param array<Chapter> $chapters
      * @return string
      */
-    private function getQueryValues(array $chapters): string
+    private function getChaptersJson(array $chapters): string
     {
-        return implode(
-            ', ',
-            array_map(
-                function (Chapter $chapter) {
-                    return '(' .
-                        ($chapter->getId() ?? 'NULL') . ', ' .
-                        ($chapter->getHeading() ?
-                            $this->databaseAdapter->quote($chapter->getHeading()) :
-                            'NULL') .
-                    ')';
-                },
-                $chapters
-            )
-        );
+        return json_encode(array_map(
+            function (Chapter $chapter) {
+                return [
+                    'id' => ($chapter->getId() ?? null),
+                    'heading' => ($chapter->getHeading() ?? null)
+                ];
+            },
+            $chapters
+        ));
+    }
+
+    /**
+     * @param array $resultRows
+     * @return array<Chapter>
+     */
+    private function getChaptersOfResultRows(array $resultRows): array
+    {
+        return array_map(function ($row) {
+            $chapter = (new Chapter())
+                ->setId((int)$row['id']);
+
+            if (!is_null($row['heading'])) {
+                $chapter->setHeading($row['heading']);
+            }
+
+            return $chapter;
+        }, $resultRows);
     }
 }

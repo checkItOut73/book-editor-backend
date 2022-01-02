@@ -18,7 +18,15 @@ class EditVerseControllerTest extends TestCase
 
     public function setUp(): void
     {
-        $this->request = new Request(['verseId' => 5], [], [], [], [], [], '{"text":"The art of crafting is awesome!"}');
+        $this->request = new Request(
+            ['verseId' => 5],
+            [],
+            [],
+            [],
+            [],
+            [],
+            '{"text":"The art of crafting is awesome!"}'
+        );
         $this->editVerseInteractor = new EditVerseInteractorStub();
 
         $this->controller = new EditVerseController($this->editVerseInteractor);

@@ -22,7 +22,7 @@ class GetBookRepository
      */
     public function getBook(int $bookId): Book
     {
-        $bookRow = $this->databaseAdapter->getRow('EXEC getBook @bookId = ' . $bookId);
+        $bookRow = $this->databaseAdapter->getRow('EXEC getBook @bookId = ' . (int)$bookId);
 
         if (empty($bookRow)) {
             throw new BookNotFoundException('There is no book with id ' . $bookId . '!');

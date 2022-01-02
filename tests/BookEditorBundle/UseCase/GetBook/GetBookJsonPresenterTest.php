@@ -7,7 +7,6 @@ use App\BookEditorBundle\Entity\Chapter;
 use App\BookEditorBundle\Entity\Paragraph;
 use App\BookEditorBundle\Entity\Verse;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @covers \App\BookEditorBundle\UseCase\GetBook\GetBookJsonPresenter
@@ -332,10 +331,5 @@ class GetBookJsonPresenterTest extends TestCase
             ]),
             $this->presenter->getJsonString()
         );
-    }
-
-    public function testGetHttpStatusCodeReturnsOk()
-    {
-        $this->assertSame(Response::HTTP_OK, $this->presenter->getHttpStatusCode());
     }
 }

@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Response;
 class GetBookJsonPresenterStub extends GetBookJsonPresenter
 {
     private string $jsonString = '';
-    private int $httpStatusCode = Response::HTTP_INTERNAL_SERVER_ERROR;
 
     public function __construct()
     {
@@ -31,17 +30,5 @@ class GetBookJsonPresenterStub extends GetBookJsonPresenter
     public function getJsonString(): string
     {
         return $this->jsonString;
-    }
-
-    public function setHttpStatusCode(int $httpStatusCode): GetBookJsonPresenterStub
-    {
-        $this->httpStatusCode = $httpStatusCode;
-
-        return $this;
-    }
-
-    public function getHttpStatusCode(): int
-    {
-        return $this->httpStatusCode;
     }
 }

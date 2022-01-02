@@ -32,7 +32,7 @@ class EditChapterInteractor
         }
 
         if (!$this->chapterEntitiy->areParagraphsNull()) {
-            $this->setParagraphsRepository->setParagraphs($chapterId, $this->chapterEntitiy->getParagraphs());
+            $this->setParagraphsRepository->setParagraphsAndGetResultParagraphs($chapterId, $this->chapterEntitiy->getParagraphs());
         }
 
         // TODO handle nested field like verses of paragraphs
