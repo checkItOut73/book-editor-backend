@@ -1,3 +1,4 @@
 - Sonderzeichen und Häkchen testen beim Neuanlegen von Inhalten
 - Längenbeschränkung berücksichtigen
 - Prepared Statements?
+- Lazy Loading (nicht ganzes Buch direkt laden)
